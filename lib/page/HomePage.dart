@@ -12,6 +12,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
+  List<BottomNavigationBarItem> _navigationViews;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _navigationViews = [
+      BottomNavigationBarItem(
+          icon: Icon(Icons.find_replace), title: Text('Find')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.favorite_border), title: Text('Follow')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.star_border), title: Text('Task')),
+      BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('Mine')),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +43,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.find_replace), title: Text('Find')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), title: Text('Follow')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.star_border), title: Text('Task')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text('Mine')),
-        ],
+        items: _navigationViews,
         currentIndex: _currentIndex,
         onTap: _onPageChange,
         type: BottomNavigationBarType.fixed,
