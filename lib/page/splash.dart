@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:viet_news_flutter/page/mine/HomePage.dart';
+import 'package:viet_news_flutter/page/HomePage.dart';
 
 class SplashPage extends StatefulWidget {
   @override

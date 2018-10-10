@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:viet_news_flutter/page/MinePage.dart';
 import 'package:viet_news_flutter/page/find/FindPage.dart';
 import 'package:viet_news_flutter/page/follow/FollowPage.dart';
+import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/task/TaskPage.dart';
 
 class HomePage extends StatefulWidget {
