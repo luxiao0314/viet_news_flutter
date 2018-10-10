@@ -2,7 +2,7 @@
 *.class
 .gradle
 /local.properties
-/.idea/workspace.xml
+.idea
 /.idea/libraries
 .DS_Store
 /build

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viet_news_flutter/page/mine/LoginPage.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -19,15 +20,31 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Mine'),
-      ),
-      body: Center(
-        child: Text('Mine'),
-      ),
+        appBar: AppBar(
+          title: Text('Mine'),
+        ),
+        body: SingleChildScrollView(
+          child: new Container(
+            child: new Column(
+              children: <Widget>[
+                MaterialButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(new MaterialPageRoute(builder: (context) {
+                      return new LoginPage();
+                    }));
+                  },
+                  child: Center(
+                    child: Text("login"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
 //
 
 //
-    );
+        );
   }
 }
