@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/TaskResponse.dart';
+import 'package:flutter/cupertino.dart';
 
 class TaskPage extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _TaskPageState extends State<TaskPage> {
       appBar: AppBar(
         title: Text('Task'),
         centerTitle: true,
+        elevation: 0.0,
       ),
       body: RefreshIndicator(
           child: ListView.builder(

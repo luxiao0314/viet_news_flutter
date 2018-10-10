@@ -3,6 +3,8 @@ import 'package:viet_news_flutter/page/find/FindPage.dart';
 import 'package:viet_news_flutter/page/follow/FollowPage.dart';
 import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/task/TaskPage.dart';
+import 'package:viet_news_flutter/res/colors.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomePage extends StatefulWidget {
   @override
