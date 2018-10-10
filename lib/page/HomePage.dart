@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/find/FindPage.dart';
 import 'package:viet_news_flutter/page/follow/FollowPage.dart';
+import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/task/TaskPage.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:viet_news_flutter/res/colors.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -99,8 +97,4 @@ class _HomePageState extends State<HomePage> {
           style: new TextStyle(fontSize: 14.0, color: text_gray));
     }
   }
-
 }
-
-
-
