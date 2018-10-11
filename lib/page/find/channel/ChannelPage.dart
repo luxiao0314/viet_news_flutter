@@ -18,8 +18,7 @@ class _ChannelPageStatus extends State<ChannelPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Padding(
@@ -51,6 +50,6 @@ class _ChannelPageStatus extends State<ChannelPage> {
           ));
         },
       ),
-    ));
+    );
   }
 }

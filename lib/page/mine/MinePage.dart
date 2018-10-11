@@ -21,10 +21,11 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Mine',style: Theme.of(context)
-              .textTheme
-              .title
-              .copyWith(color: Colors.black)),
+          title: Text('Mine',
+              style: Theme.of(context)
+                  .textTheme
+                  .title
+                  .copyWith(color: Colors.black)),
           centerTitle: true,
           backgroundColor: Colors.white,
           elevation: 0.0,
@@ -35,7 +36,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
               children: <Widget>[
                 MaterialButton(
                   onPressed: () {
-                    Navigator.of(context)
+                    Navigator.of(context, rootNavigator: true)
                         .push(new MaterialPageRoute(builder: (context) {
                       return new LoginPage();
                     }));

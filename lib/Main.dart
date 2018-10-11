@@ -8,15 +8,15 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-//      theme: ThemeData(
-////          brightness: Brightness.light,
-////          primaryColor: Colors.red[500],
-//        primarySwatch: Colors.red,
-////          backgroundColor: Colors.white
-//      ),
+      theme: ThemeData(
+//          brightness: Brightness.light,
+//          primaryColor: Colors.red[500],
+        primarySwatch: Colors.red,
+//          backgroundColor: Colors.white
+      ),
       home: Scaffold(
 //        backgroundColor: Colors.white,
         body: SplashPage(),
