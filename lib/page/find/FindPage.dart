@@ -133,7 +133,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
   }
 
   void _onAddTap() {
-    Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
+    Navigator.of(context,rootNavigator: true).push(CupertinoPageRoute(builder: (context) {
       return ChannelPage();
     }));
   }
