@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 
 class NewsPage extends StatefulWidget {
   NewsPage(this.channelId);
+
   final String channelId;
   int count = 0;
+
   @override
   State<StatefulWidget> createState() => _NewsPageStatus();
 }
@@ -13,8 +16,11 @@ class NewsPage extends StatefulWidget {
 class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: false,
       onRefresh: _onRefresh,
+      onOffsetChange: _onOffsetCallback,
       child: ListView.builder(
           physics: AlwaysScrollableScrollPhysics(),
           itemCount: 10,
@@ -29,9 +35,17 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
     );
   }
 
-  Future<void> _onRefresh() async {
-    setState(() {
-      widget.count++;
-    });
+  Future<void> _onRefresh(bool up) async {
+    if (up) {
+      setState(() {
+        widget.count++;
+      });
+    } else {
+      //footerIndicator Callback
+    }
+  }
+
+  void _onOffsetCallback(bool isUp, double offset) {
+    // if you want change some widgets state ,you should rewrite the callback
   }
 }
