@@ -40,6 +40,7 @@ class _TaskPageState extends State<TaskPage> {
               itemBuilder: _buildListItem,
               addRepaintBoundaries: false),
         ));
+
   }
 
 //创建列表item
@@ -232,13 +233,13 @@ class _TaskPageState extends State<TaskPage> {
 
   //刷新数据
   Future<void> _onRefresh(bool up) async {
-    if(up){
+    if (up) {
       print('准备刷新');
       //模拟延迟1秒
       await Future.delayed(Duration(seconds: 1));
       print('开始刷新--1秒延迟后');
       loadData(false);
-    }else{
+    } else {
       //footerIndicator Callback
     }
   }
