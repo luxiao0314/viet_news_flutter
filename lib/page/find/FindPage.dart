@@ -86,13 +86,11 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
       return PreferredSize(
           child: Container(
             height: 40.0,
-            color: Colors.grey[300],
+            color: Colors.white,
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    home: TabBar(
+                    child: TabBar(
                       indicator: BoxDecoration(),
                       isScrollable: true,
                       controller: _controller,
@@ -100,7 +98,6 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
                       unselectedLabelColor: Colors.black,
                       tabs: _getTabs(),
                     ),
-                  )
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -108,7 +105,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
                     onTap: _onAddTap,
                     child: Icon(
                       Icons.add,
-                      color: Colors.white,
+                      color: Colors.grey,
                     ),
                   ),
                 )
