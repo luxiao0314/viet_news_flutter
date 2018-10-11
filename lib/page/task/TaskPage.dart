@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/TaskResponse.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:viet_news_flutter/local/NewsLocalizations.dart';
 
 class TaskPage extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Task'),
+          title: Text(NewsLocalizations.of(context).task),
           centerTitle: true,
           backgroundColor: Colors.red,
           elevation: 0.0,

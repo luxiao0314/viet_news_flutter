@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
+import 'package:viet_news_flutter/local/NewsLocalizations.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Mine',
+          title: Text(NewsLocalizations.of(context).mine,
               style: Theme.of(context)
                   .textTheme
                   .title

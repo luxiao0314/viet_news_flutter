@@ -5,6 +5,7 @@ import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/task/TaskPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:viet_news_flutter/local/NewsLocalizations.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,10 +15,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var tabImages;
   int _tabIndex = 0;
-  var appBarTitles = ['Find', 'Follow', 'Task', 'Mine'];
+  var appBarTitles;
 
   //初始化数据
   void initData() {
+    appBarTitles = [
+      NewsLocalizations.of(context).find,
+      NewsLocalizations.of(context).follow,
+      NewsLocalizations.of(context).task,
+      NewsLocalizations.of(context).mine
+    ];
     //初始化选中和未选中的icon
     tabImages = [
       [
@@ -66,16 +73,15 @@ class _HomePageState extends State<HomePage> {
         tabBuilder: (BuildContext context, int index) {
           return CupertinoTabView(
             builder: (BuildContext context) {
-              return
-                IndexedStack(
-                  index: _tabIndex,
-                  children: <Widget>[
-                    FindPage(),
-                    FollowPage(),
-                    TaskPage(),
-                    MinePage(),
-                  ],
-                );
+              return IndexedStack(
+                index: _tabIndex,
+                children: <Widget>[
+                  FindPage(),
+                  FollowPage(),
+                  TaskPage(),
+                  MinePage(),
+                ],
+              );
             },
           );
         });

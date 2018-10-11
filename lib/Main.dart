@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:viet_news_flutter/local/NewsLocalizationsDelegate.dart';
 import 'package:viet_news_flutter/page/splash.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(new App());
 
@@ -21,6 +23,19 @@ class App extends StatelessWidget {
 //        backgroundColor: Colors.white,
         body: SplashPage(),
       ),
+
+      //国际化
+      localizationsDelegates: [
+        //此处
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        NewsLocalizationsDelegate.delegate,
+      ],
+      supportedLocales: [
+        //此处
+        const Locale('zh', 'CH'),
+        const Locale('en', 'US'),
+      ],
     );
   }
 }
