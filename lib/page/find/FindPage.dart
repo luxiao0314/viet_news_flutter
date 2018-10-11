@@ -35,6 +35,8 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
         centerTitle: true,
         title: Text('Find'),
         bottom: _initTabBar(),
+        backgroundColor: Colors.red[500],
+        elevation: 0.0,
       ),
       body: _initPageView(),
     );
@@ -88,14 +90,17 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: TabBar(
-                    indicator: BoxDecoration(),
-                    isScrollable: true,
-                    controller: _controller,
-                    labelColor: Colors.red[500],
-                    unselectedLabelColor: Colors.black,
-                    tabs: _getTabs(),
-                  ),
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    home: TabBar(
+                      indicator: BoxDecoration(),
+                      isScrollable: true,
+                      controller: _controller,
+                      labelColor: Colors.red[500],
+                      unselectedLabelColor: Colors.black,
+                      tabs: _getTabs(),
+                    ),
+                  )
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -133,3 +138,5 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     }));
   }
 }
+
+

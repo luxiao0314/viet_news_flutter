@@ -22,6 +22,9 @@ class _FollowPageStatus extends State<FollowPage>
     return Scaffold(
       appBar: AppBar(
         title: Text('Follow'),
+        centerTitle: true,
+        backgroundColor: Colors.red[500],
+        elevation: 0.0,
       ),
       body: Center(
         child: Text('Follow'),

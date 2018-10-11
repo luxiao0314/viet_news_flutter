@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/TaskResponse.dart';
-import 'package:flutter/cupertino.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 
 class TaskPage extends StatefulWidget {
   @override
@@ -24,16 +24,22 @@ class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Task'),
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: RefreshIndicator(
+        appBar: AppBar(
+          title: Text('Task'),
+          centerTitle: true,
+          backgroundColor: Colors.red,
+          elevation: 0.0,
+        ),
+        body: new SmartRefresher(
+          enablePullDown: true,
+          enablePullUp: true,
+          onRefresh: _onRefresh,
+          onOffsetChange: _onOffsetCallback,
           child: ListView.builder(
-              itemCount: dataList.length, itemBuilder: _buildListItem),
-          onRefresh: _onRefresh),
-    );
+              itemCount: dataList.length,
+              itemBuilder: _buildListItem,
+              addRepaintBoundaries: false),
+        ));
   }
 
 //创建列表item
@@ -198,6 +204,7 @@ class _TaskPageState extends State<TaskPage> {
               padding: EdgeInsets.only(right: 10.0),
               child: LinearProgressIndicator(
                   backgroundColor: Colors.grey[200],
+                  valueColor: AlwaysStoppedAnimation(Colors.red[500]),
                   value: bean.taskStatus.currentScore.toDouble() /
                       bean.taskStatus.totalScore),
               width: 77.0,
@@ -224,12 +231,20 @@ class _TaskPageState extends State<TaskPage> {
   }
 
   //刷新数据
-  Future<void> _onRefresh() async {
-    print('准备刷新');
-    //模拟延迟1秒
-    await Future.delayed(Duration(seconds: 1));
-    print('开始刷新--1秒延迟后');
-    loadData(false);
+  Future<void> _onRefresh(bool up) async {
+    if(up){
+      print('准备刷新');
+      //模拟延迟1秒
+      await Future.delayed(Duration(seconds: 1));
+      print('开始刷新--1秒延迟后');
+      loadData(false);
+    }else{
+      //footerIndicator Callback
+    }
+  }
+
+  void _onOffsetCallback(bool isUp, double offset) {
+    // if you want change some widgets state ,you should rewrite the callback
   }
 
   //加载本地JSON。需要在yaml中配置对应的文件

@@ -21,7 +21,13 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Mine'),
+          title: Text('Mine',style: Theme.of(context)
+              .textTheme
+              .title
+              .copyWith(color: Colors.black)),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0.0,
         ),
         body: SingleChildScrollView(
           child: new Container(
