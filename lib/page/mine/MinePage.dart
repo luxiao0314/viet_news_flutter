@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
 
@@ -37,7 +38,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
                 MaterialButton(
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true)
-                        .push(new MaterialPageRoute(builder: (context) {
+                        .push(new CupertinoPageRoute(builder: (context) {
                       return new LoginPage();
                     }));
                   },
