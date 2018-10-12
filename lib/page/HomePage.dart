@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   var tabImages;
   int _tabIndex = 0;
   var appBarTitles;
+  List<BottomNavigationBarItem> tabItems;
 
   //初始化数据
   void initData() {
@@ -44,6 +45,12 @@ class _HomePageState extends State<HomePage> {
         getTabImage('images/ic_mine_select.png')
       ]
     ];
+    tabItems = [
+      BottomNavigationBarItem(icon: getTabIcon(0), title: getTabTitle(0)),
+      BottomNavigationBarItem(icon: getTabIcon(1), title: getTabTitle(1)),
+      BottomNavigationBarItem(icon: getTabIcon(2), title: getTabTitle(2)),
+      BottomNavigationBarItem(icon: getTabIcon(3), title: getTabTitle(3)),
+    ];
   }
 
   /*
@@ -54,16 +61,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     initData();
+  }
+  @override
+  Widget build(BuildContext context) {
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
-          items: [
-            BottomNavigationBarItem(icon: getTabIcon(0), title: getTabTitle(0)),
-            BottomNavigationBarItem(icon: getTabIcon(1), title: getTabTitle(1)),
-            BottomNavigationBarItem(icon: getTabIcon(2), title: getTabTitle(2)),
-            BottomNavigationBarItem(icon: getTabIcon(3), title: getTabTitle(3)),
-          ],
+          items: tabItems,
           onTap: (index) {
             setState(() {
               _tabIndex = index;
