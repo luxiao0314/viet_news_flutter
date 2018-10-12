@@ -43,6 +43,8 @@ class _HomePageState extends State<HomePage> {
         getTabImage('images/ic_mine_select.png')
       ]
     ];
+
+    //有上下文，必须在build方法中执行
     appBarTitles = [
       NewsLocalizations.of(context).find,
       NewsLocalizations.of(context).follow,
