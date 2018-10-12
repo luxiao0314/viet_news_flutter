@@ -25,14 +25,14 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
             elevation: 0.0,
             backgroundColor: Colors.white,
             bottom: _initTabBar()),
-        body:
-            new TabBarView(children: [new RegisterPage(), new LoginSubPage()]),
+        body: TabBarView(children: [RegisterPage(), LoginSubPage()]),
       ),
     );
   }
 
   Widget _initTabBar() {
     return PreferredSize(
+      preferredSize: Size.fromHeight(50.0),
         child: Container(
           height: 99.0,
           child: Column(
@@ -62,7 +62,6 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
               )),
             ],
           ),
-        ),
-        preferredSize: Size.fromHeight(50.0));
+        ));
   }
 }
