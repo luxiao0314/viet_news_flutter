@@ -4,8 +4,8 @@ import 'package:viet_news_flutter/page/follow/FollowPage.dart';
 import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/task/TaskPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,12 +20,10 @@ class _HomePageState extends State<HomePage> {
 
   //初始化数据
   void initData() {
-    appBarTitles = [
-      NewsLocalizations.of(context).find,
-      NewsLocalizations.of(context).follow,
-      NewsLocalizations.of(context).task,
-      NewsLocalizations.of(context).mine
-    ];
+  }
+
+  //页面初始化
+  void initView(){
     //初始化选中和未选中的icon
     tabImages = [
       [
@@ -45,6 +43,13 @@ class _HomePageState extends State<HomePage> {
         getTabImage('images/ic_mine_select.png')
       ]
     ];
+    appBarTitles = [
+      NewsLocalizations.of(context).find,
+      NewsLocalizations.of(context).follow,
+      NewsLocalizations.of(context).task,
+      NewsLocalizations.of(context).mine
+    ];
+
     tabItems = [
       BottomNavigationBarItem(icon: getTabIcon(0), title: getTabTitle(0)),
       BottomNavigationBarItem(icon: getTabIcon(1), title: getTabTitle(1)),
@@ -66,8 +71,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     initData();
   }
+
   @override
   Widget build(BuildContext context) {
+    initView();
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: tabItems,

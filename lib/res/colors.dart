@@ -7,6 +7,8 @@ const Color backgroundGray = Color(0xFFEFEFF4);
 const Color groupSubtitle = Color(0xFF777777);
 
 //颜色配置
+const Color primary_red = Color(0xFFF24B4F);
 const Color text_red = Color(0xFFF24B4F);
 const Color text_gray = Color(0xFF4A4A4A);
 const Color text_light_gray = Color(0xFF9B9B9B);
+
