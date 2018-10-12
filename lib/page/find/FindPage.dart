@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:viet_news_flutter/bean/ChannelResponse.dart';
+import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
 import 'package:viet_news_flutter/page/find/news/NewsPage.dart';
 

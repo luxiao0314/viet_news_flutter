@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:viet_news_flutter/bean/TaskResponse.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:viet_news_flutter/model/response/TaskResponse.dart';
 
 class TaskPage extends StatefulWidget {
   @override

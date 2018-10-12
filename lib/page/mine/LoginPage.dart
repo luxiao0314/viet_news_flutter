@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:viet_news_flutter/page/mine/LoginSubPage.dart';
+import 'package:viet_news_flutter/page/mine/PwdLoginPage.dart';
 import 'package:viet_news_flutter/page/mine/RegisterPage.dart';
 
 /// @Description 登录页面
@@ -14,16 +16,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new DefaultTabController(
       length: 2,
@@ -34,7 +26,7 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
             backgroundColor: Colors.white,
             bottom: _initTabBar()),
         body:
-            new TabBarView(children: [new RegisterPage(), new RegisterPage()]),
+            new TabBarView(children: [new RegisterPage(), new LoginSubPage()]),
       ),
     );
   }
