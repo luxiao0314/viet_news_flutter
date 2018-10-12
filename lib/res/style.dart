@@ -11,3 +11,4 @@ const TextStyle text_style_14_red = TextStyle(fontSize: 14.0,color: text_red);
 const TextStyle text_style_14_black = TextStyle(fontSize: 14.0,color: text_black);
 const TextStyle text_style_14_gray = TextStyle(fontSize: 14.0,color: text_gray);
 const TextStyle text_style_14_white = TextStyle(fontSize: 14.0,color: text_white);
+// ContentListView Operator button text style

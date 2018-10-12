@@ -57,6 +57,9 @@ flutter:
     - images/ic_task_select.png
     - images/ic_task_unselect.png
     - images/ic_temp_find.jpg
+    - images/ic_content_list_like.png
+    - images/ic_content_list_collection.png
+    - images/ic_content_list_coin.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
