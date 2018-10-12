@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
+import 'package:viet_news_flutter/res/colors.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -13,9 +14,20 @@ class _RegisterStatus extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       padding: EdgeInsets.all(20.0),
+      margin: EdgeInsetsDirectional.only(top: 20.0),
       child: Column(
         children: <Widget>[
+          Container(
+              margin: EdgeInsetsDirectional.only(bottom: 20.0),
+              padding: EdgeInsetsDirectional.only(
+                  top: 15.0, bottom: 15.0, end: 40.0, start: 40.0),
+              decoration: BoxDecoration(
+                  color: tips_blue,
+                  borderRadius: const BorderRadius.all(Radius.circular(60.0))),
+              child: Text("密码可使用字母、数字、字符两者组合，限8～20位",
+                  style: TextStyle(fontSize: 12.0))),
           Row(
             children: <Widget>[
               Padding(
