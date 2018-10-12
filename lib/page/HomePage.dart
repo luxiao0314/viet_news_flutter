@@ -6,6 +6,7 @@ import 'package:viet_news_flutter/page/task/TaskPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/local/NewsLocalizations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:viet_news_flutter/res/style.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -115,10 +116,10 @@ class _HomePageState extends State<HomePage> {
   Text getTabTitle(int curIndex) {
     if (curIndex == _tabIndex) {
       return new Text(appBarTitles[curIndex],
-          style: new TextStyle(fontSize: 14.0, color: text_red));
+          style: text_style_14_red);
     } else {
       return new Text(appBarTitles[curIndex],
-          style: new TextStyle(fontSize: 14.0, color: text_gray));
+          style: text_style_14_gray);
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
 import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/res/colors.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -27,9 +28,9 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
               style: Theme.of(context)
                   .textTheme
                   .title
-                  .copyWith(color: Colors.black)),
+                  .copyWith(color: text_black)),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: bg_white,
           elevation: 0.0,
         ),
         body: SingleChildScrollView(

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/TaskResponse.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
 import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/style.dart';
 
 class TaskPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _TaskPageState extends State<TaskPage> {
         appBar: AppBar(
           title: Text(NewsLocalizations.of(context).task),
           centerTitle: true,
-          backgroundColor: Colors.red,
+          backgroundColor: primary_red,
           elevation: 0.0,
         ),
         body: new SmartRefresher(
@@ -53,8 +54,8 @@ class _TaskPageState extends State<TaskPage> {
         padding: EdgeInsets.all(20.0),
         child: Container(
           decoration: new BoxDecoration(
-            border: new Border.all(width: 1.0, color: Colors.grey[200]),
-            color: Colors.grey[200],
+            border: new Border.all(width: 1.0, color: bg_gray),
+            color: bg_gray,
             borderRadius: new BorderRadius.all(new Radius.circular(60.0)),
           ),
           padding: EdgeInsets.all(15.0),
@@ -93,13 +94,11 @@ class _TaskPageState extends State<TaskPage> {
                         children: <Widget>[
                           Text(
                             '每周前100名',
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
+                            style: text_style_18_white,
                           ),
                           Text(
                             '瓜分2000000',
-                            style:
-                                TextStyle(fontSize: 28.0, color: Colors.white),
+                            style: text_style_28_white,
                           ),
                         ],
                       ),
@@ -117,8 +116,7 @@ class _TaskPageState extends State<TaskPage> {
                       minSize: 14.0,
                       child: Text(
                         "查看",
-                        style:
-                            TextStyle(color: Colors.red[500], fontSize: 14.0),
+                        style: text_style_14_red,
                       ),
                     ),
                   ],
@@ -126,7 +124,7 @@ class _TaskPageState extends State<TaskPage> {
               ),
               Text(
                 bean.taskName,
-                style: TextStyle(fontSize: 12.0, color: Colors.white),
+                style: text_style_12_white,
               )
             ],
           ));
@@ -154,7 +152,7 @@ class _TaskPageState extends State<TaskPage> {
                       Text(
                         bean.taskName,
                         maxLines: 1,
-                        style: TextStyle(color: Colors.black, fontSize: 15.0),
+                        style: text_style_14_black,
                       ),
 //                      ),
                       Container(
@@ -166,7 +164,7 @@ class _TaskPageState extends State<TaskPage> {
                   Text(
                     '${bean.taskDesc}\n',
                     maxLines: 2,
-                    style: TextStyle(color: Colors.grey[500], fontSize: 14.0),
+                    style: text_style_14_gray,
                   ),
                   _taskBottomWidget(bean),
                 ],
@@ -183,7 +181,7 @@ class _TaskPageState extends State<TaskPage> {
               minSize: 13.0,
               child: Text(
                 "去邀请",
-                style: TextStyle(color: Colors.white, fontSize: 13.0),
+                style: text_style_14_white,
               ),
             ),
           ],
@@ -214,11 +212,11 @@ class _TaskPageState extends State<TaskPage> {
             ),
             Text(
               '${bean.taskStatus.currentScore}/',
-              style: TextStyle(color: Colors.red[500], fontSize: 12.0),
+              style: text_style_12_red,
             ),
             Text(
               '${bean.taskStatus.totalScore}',
-              style: TextStyle(color: Colors.red[500], fontSize: 11.0),
+              style: text_style_12_red,
             ),
           ],
         );
@@ -228,7 +226,7 @@ class _TaskPageState extends State<TaskPage> {
     } else
       return Text(
         bean.taskStatus.message,
-        style: TextStyle(color: Colors.red[500], fontSize: 11.0),
+        style: text_style_12_red,
       );
   }
 
@@ -273,7 +271,7 @@ class _TaskPageState extends State<TaskPage> {
     if (bean.taskScore > 0) {
       return Text(
         "+${bean.taskScore}",
-        style: TextStyle(color: Colors.red[500], fontSize: 14.0),
+        style: text_style_14_red,
       );
     } else {
       return Text("");
