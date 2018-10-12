@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
+import 'package:viet_news_flutter/local/NewsLocalizations.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
 import 'package:viet_news_flutter/page/find/news/NewsPage.dart';
+import 'package:viet_news_flutter/res/colors.dart';
 
 class FindPage extends StatefulWidget {
   @override
@@ -33,9 +35,9 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Find'),
+        title: Text(NewsLocalizations.of(context).find),
         bottom: _initTabBar(),
-        backgroundColor: Colors.red[500],
+        backgroundColor: primary_red,
         elevation: 0.0,
       ),
       body: _initPageView(),
@@ -94,8 +96,8 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
                       indicator: BoxDecoration(),
                       isScrollable: true,
                       controller: _controller,
-                      labelColor: Colors.red[500],
-                      unselectedLabelColor: Colors.black,
+                      labelColor: text_red,
+                      unselectedLabelColor: text_black,
                       tabs: _getTabs(),
                     ),
                 ),

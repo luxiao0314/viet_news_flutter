@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/res/colors.dart';
 
 class FollowPage extends StatefulWidget {
   @override
@@ -21,9 +23,9 @@ class _FollowPageStatus extends State<FollowPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Follow'),
+        title: Text(NewsLocalizations.of(context).follow),
         centerTitle: true,
-        backgroundColor: Colors.red[500],
+        backgroundColor: primary_red,
         elevation: 0.0,
       ),
       body: Center(

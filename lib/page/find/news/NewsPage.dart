@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/view/ContentListView.dart';
 
 class NewsPage extends StatefulWidget {
   NewsPage(this.channelId);
@@ -26,10 +28,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
           itemCount: 10,
           itemBuilder: (context, index) {
             return Center(
-              child: Text(
-                "channelId = ${widget.channelId} , index = $index , count = ${widget.count}",
-                style: TextStyle(color: Colors.red[500]),
-              ),
+              child: ContentListView()
             );
           }),
     );
