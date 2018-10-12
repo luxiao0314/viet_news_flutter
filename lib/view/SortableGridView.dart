@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 typedef bool CanAccept(int oldIndex, int newIndex);
 
@@ -11,12 +11,23 @@ class SortableGridView<T> extends StatefulWidget {
   final int crossAxisCount;
   final Axis scrollDirection;
   final double childAspectRatio;
+  final ScrollPhysics physics;
+  final bool shrinkWrap;
+
+  final double mainAxisSpacing;
+  final double crossAxisSpacing;
+  final VoidCallback onDragStarted;
 
   SortableGridView(
     this.dataList, {
     Key key,
     this.scrollDirection = Axis.vertical,
     this.crossAxisCount = 3,
+    this.physics,
+    this.shrinkWrap,
+    this.onDragStarted,
+    this.mainAxisSpacing = 0.0,
+    this.crossAxisSpacing = 0.0,
     this.childAspectRatio = 1.0,
     @required this.itemBuilder,
     @required this.canAccept,
@@ -44,6 +55,10 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      crossAxisSpacing: widget.crossAxisSpacing,
+      mainAxisSpacing: widget.mainAxisSpacing,
+      physics: widget.physics,
+      shrinkWrap: widget.shrinkWrap,
       childAspectRatio: widget.childAspectRatio, //item宽高比
       scrollDirection: widget.scrollDirection, //默认vertical
       crossAxisCount: widget.crossAxisCount, //列数
@@ -88,7 +103,8 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
             //接下来松手 是否需要将数据给这个widget？  因为需要在拖动时改变UI，所以在这里直接修改数据源
             onWillAccept: (int fromIndex) {
               print('$index will accept item $fromIndex');
-              final accept = fromIndex != index;
+              final accept =
+                  fromIndex != index && widget.canAccept(fromIndex, index);
               if (accept) {
                 willAcceptIndex = index;
                 showItemWhenCovered = true;
@@ -103,6 +119,7 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
             },
           ),
           onDragStarted: () {
+            widget.onDragStarted();
             //开始拖动，备份数据源
             draggingItemIndex = index;
             dataListBackup = dataList.sublist(0);
