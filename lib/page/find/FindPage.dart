@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/AllChannelListResponse.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
-import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
 import 'package:viet_news_flutter/page/find/news/NewsPage.dart';
@@ -40,7 +40,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(NewsLocalizations.of(context).find),
+        title: Text(Local.of(context).find),
         bottom: _initTabBar(),
         backgroundColor: primary_red,
         elevation: 0.0,

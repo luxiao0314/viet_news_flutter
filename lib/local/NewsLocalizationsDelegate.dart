@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/local/Local.dart';
 
 
 /*
  * 国际化
  */
-class NewsLocalizationsDelegate extends LocalizationsDelegate<NewsLocalizations>{
+class NewsLocalizationsDelegate extends LocalizationsDelegate<Local>{
 
   const NewsLocalizationsDelegate();
 
@@ -18,12 +18,12 @@ class NewsLocalizationsDelegate extends LocalizationsDelegate<NewsLocalizations>
   }
 
   @override
-  Future<NewsLocalizations> load(Locale locale) {
-    return new SynchronousFuture<NewsLocalizations>(new NewsLocalizations(locale));
+  Future<Local> load(Locale locale) {
+    return new SynchronousFuture<Local>(new Local(locale));
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<NewsLocalizations> old) {
+  bool shouldReload(LocalizationsDelegate<Local> old) {
     return false;
   }
 

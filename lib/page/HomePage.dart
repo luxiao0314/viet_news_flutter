@@ -4,7 +4,7 @@ import 'package:viet_news_flutter/page/follow/FollowPage.dart';
 import 'package:viet_news_flutter/page/mine/MinePage.dart';
 import 'package:viet_news_flutter/page/task/TaskPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
-import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/local/Local.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:viet_news_flutter/res/style.dart';
 
@@ -47,10 +47,10 @@ class _HomePageState extends State<HomePage> {
 
     //有上下文，必须在build方法中执行
     appBarTitles = [
-      NewsLocalizations.of(context).find,
-      NewsLocalizations.of(context).follow,
-      NewsLocalizations.of(context).task,
-      NewsLocalizations.of(context).mine
+      Local.of(context).find,
+      Local.of(context).follow,
+      Local.of(context).task,
+      Local.of(context).mine
     ];
 
     tabItems = [

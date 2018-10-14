@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
-import 'package:viet_news_flutter/local/NewsLocalizations.dart';
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/util/User.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
+  String userName;
+
   @override
   void initState() {
     super.initState();
@@ -22,9 +25,123 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    Widget userItem = new Container(
+      padding: const EdgeInsets.all(32.0),
+      child: new Row(
+        children: <Widget>[
+          new Container(
+            padding: const EdgeInsets.only(right: 32.0),
+            child: new Image.asset("images/ic_default_article.png",
+                width: 100.0, height: 100.0, fit: BoxFit.cover),
+          ),
+          new Expanded(
+              child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: new Text(
+                    userName == null
+                        ? Local.of(context).login_please
+                        : userName,
+                    style: new TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                new Text(
+                    "${Local.of(context).fans} 1.2w | ${Local.of(context).attention} 10",
+                    style: new TextStyle(
+                      color: Colors.grey[500],
+                    )),
+              ])),
+          new Container(
+            margin: const EdgeInsets.only(left: 5.0),
+            padding: const EdgeInsets.all(8.0),
+            decoration: new BoxDecoration(
+                color: Colors.red[700],
+                borderRadius: BorderRadius.all(Radius.circular(60.0))),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
+                Text(
+                  Local.of(context).edit,
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+    Widget myWallet = new ListTile(
+        leading: const Icon(Icons.favorite),
+        title: Text(Local.of(context).my_wallet),
+        trailing:
+            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
+        onTap: () async {
+          await User.currentUser.isLogin().then((isLogin) {
+            if (isLogin) {
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(builder: (context) {
+                return new LoginPage();
+              }));
+            } else {
+              print('aaron login');
+              Navigator.of(context).push(
+                  new MaterialPageRoute(builder: (context) => new LoginPage()));
+            }
+          });
+        });
+
+    Widget inviteFriends = new ListTile(
+        leading: const Icon(Icons.info),
+        title: Text(Local.of(context).invite_friends),
+        trailing:
+            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
+        onTap: () {
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            return new LoginPage();
+          }));
+        });
+
+    Widget favorite = new ListTile(
+        leading: const Icon(Icons.info),
+        title: Text(Local.of(context).favorite),
+        trailing:
+            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
+        onTap: () {
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            return new LoginPage();
+          }));
+        });
+    Widget settings = new ListTile(
+        leading: const Icon(Icons.info),
+        title: Text(Local.of(context).settings),
+        trailing:
+            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
+        onTap: () {
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            return new LoginPage();
+          }));
+        });
+    Widget logout = new ListTile(
+        leading: const Icon(Icons.info),
+        title: Text(Local.of(context).logout),
+        trailing:
+            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
+        onTap: () async {
+          User.currentUser.logout();
+          setState(() {
+            userName = null;
+          });
+        });
+
     return Scaffold(
         appBar: AppBar(
-          title: Text(NewsLocalizations.of(context).mine,
+          title: Text(Local.of(context).mine,
               style: Theme.of(context)
                   .textTheme
                   .title
@@ -33,24 +150,14 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
           backgroundColor: bg_white,
           elevation: 0.0,
         ),
-        body: SingleChildScrollView(
-          child: new Container(
-            child: new Column(
-              children: <Widget>[
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.of(context, rootNavigator: true)
-                        .push(new CupertinoPageRoute(builder: (context) {
-                      return new LoginPage();
-                    }));
-                  },
-                  child: Center(
-                    child: Text("login"),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: ListView(
+          children: <Widget>[
+            userItem,
+            myWallet,
+            inviteFriends,
+            favorite,
+            settings,
+          ],
         )
 //
 

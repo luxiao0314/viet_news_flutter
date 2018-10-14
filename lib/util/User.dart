@@ -6,13 +6,15 @@ class User {
   static final String IS_LOGIN_KEY = "isLogin";
   static final String USERNAME_KEY = "userName";
 
-  static final User _currentUser = new User._internal();
+//  static final User _currentUser = new User._internal();
+
+  static final  User currentUser = new User._internal();
 
   SharedPreferences _sp;
 
-  factory User() {
-    return _currentUser;
-  }
+//  factory User() {
+//    return _currentUser;
+//  }
 
   User._internal() {
     init();
@@ -29,7 +31,7 @@ class User {
     await _sp.setBool(IS_LOGIN_KEY, true);
   }
 
-  Future clearLoginInfo() async {
+  Future logout() async {
     print('clean');
     return _sp.clear();
   }

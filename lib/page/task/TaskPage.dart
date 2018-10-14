@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
 import 'package:viet_news_flutter/model/response/TaskResponse.dart';
-import 'package:viet_news_flutter/local/NewsLocalizations.dart';
+import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/style.dart';
 
@@ -27,7 +27,7 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(NewsLocalizations.of(context).task),
+          title: Text(Local.of(context).task),
           centerTitle: true,
           backgroundColor: primary_red,
           elevation: 0.0,
