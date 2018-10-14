@@ -13,7 +13,6 @@ class Local {
   Local(this.locale);
 
   ///根据不同 locale.languageCode 加载不同语言对应
-  ///GSYStringEn和GSYStringZh都继承了GSYStringBase
   static Map<String, StringEn> _localizedValues = {
     'en': new StringEn(),
     'zh': new StringZh(),
