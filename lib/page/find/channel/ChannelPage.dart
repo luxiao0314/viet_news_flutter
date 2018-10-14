@@ -128,40 +128,41 @@ class _ChannelPageStatus extends State<ChannelPage> {
           });
         },
         itemBuilder: (context, data) {
-          return Stack(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Card(
-                  color: Color(0xFFf5f7f9),
-                  child: CupertinoButton(
-                      onPressed: () {},
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                      child: Center(
-                        child: Text(
-                          data.channel_name,
-                          style: TextStyle(fontSize: 15.0, color: Colors.black),
-                        ),
-                      )),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: _canDrag && widget.followList.indexOf(data) != 0
-                    ? GestureDetector(
-                        child: Icon(Icons.close),
-                        onTap: () {
-                          setState(() {
-                            widget.followList.remove(data);
-                            widget.unFollowList.add(data);
-                          });
-                        },
-                      )
-                    : null,
-              )
-            ],
-          );
+          return GestureDetector(
+              onTap: () {
+                if (_canDrag && widget.followList.indexOf(data) != 0) {
+                  setState(() {
+                    widget.followList.remove(data);
+                    widget.unFollowList.add(data);
+                  });
+                }
+              },
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Card(
+                      color: Color(0xFFf5f7f9),
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
+                          child: Center(
+                            child: Text(
+                              data.channel_name,
+                              style: TextStyle(
+                                  fontSize: 15.0, color: Colors.black),
+                            ),
+                          )),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: _canDrag && widget.followList.indexOf(data) != 0
+                        ? Icon(Icons.close)
+                        : null,
+                  )
+                ],
+              ));
         },
       ),
     );
