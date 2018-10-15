@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> {
     initView();
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
+
           items: tabItems,
           onTap: (index) {
             setState(() {
@@ -116,10 +117,10 @@ class _HomePageState extends State<HomePage> {
   Text getTabTitle(int curIndex) {
     if (curIndex == _tabIndex) {
       return new Text(appBarTitles[curIndex],
-          style: text_style_14_red);
+          style: text_style_12_red);
     } else {
       return new Text(appBarTitles[curIndex],
-          style: text_style_14_gray);
+          style: text_style_12_gray);
     }
   }
 }
