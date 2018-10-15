@@ -42,7 +42,7 @@ class _PwdLoginStatus extends State<PwdLoginPage> {
                   child: CupertinoButton(
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast("忘记密码?"),
+                onPressed: () => toast(context, "忘记密码?"),
                 minSize: 13.0,
                 child: Text(
                   "忘记密码?",
@@ -60,7 +60,7 @@ class _PwdLoginStatus extends State<PwdLoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-              onPressed: () => toast("登录"),
+              onPressed: () => toast(context, "登录"),
               minSize: 13.0,
               child: Text(
                 "登录",

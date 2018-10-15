@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' show CupertinoButton;
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
+import 'package:viet_news_flutter/view/CloseButton.dart';
 import 'package:viet_news_flutter/view/SortableGridView.dart';
 
 class ChannelPage extends StatefulWidget {
@@ -26,7 +27,9 @@ class _ChannelPageStatus extends State<ChannelPage> {
             padding: EdgeInsets.only(top: 50.0, right: 20.0),
             child: Container(
               alignment: Alignment.centerRight,
-              child: CloseButton(),
+              child: MyCloseButton(
+                result: "result",
+              ),
             ),
           ),
         ),
@@ -152,10 +155,9 @@ class _ChannelPageStatus extends State<ChannelPage> {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child:
-                        _needShowClose && widget.followList.indexOf(data) != 0
-                            ? Icon(Icons.close)
-                            : null,
+                    child: _needShowClose && data.can_delete
+                        ? Icon(Icons.close)
+                        : null,
                   )
                 ],
               ));

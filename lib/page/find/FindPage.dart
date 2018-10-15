@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/AllChannelListResponse.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/local/Local.dart';
+import 'package:viet_news_flutter/manager/Toast.dart';
 import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
 import 'package:viet_news_flutter/page/find/news/NewsPage.dart';
@@ -138,17 +137,18 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     }
   }
 
-  void _onAddTap() {
+  void _onAddTap() async {
     if (channelAllListResponse != null &&
         channelAllListResponse.data != null &&
         channelAllListResponse.data.unFollowChannelList != null &&
         channelAllListResponse.data.followChannelList != null) {
-      Navigator.of(context, rootNavigator: true)
-          .push(CupertinoPageRoute(builder: (context) {
+      final result = await Navigator.of(context, rootNavigator: true)
+          .push(MaterialPageRoute<String>(builder: (context) {
         return ChannelPage(
             followList: channelAllListResponse.data.followChannelList,
             unFollowList: channelAllListResponse.data.unFollowChannelList);
       }));
+      Toast.toast(context, result == null ? "asd" : result);
     }
   }
 }
