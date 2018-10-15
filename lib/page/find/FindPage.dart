@@ -59,13 +59,8 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     return tabList.map((channelBean) {
       return GestureDetector(
         child: Center(
-          child: NewsPage(channelBean.id),
+          child: NewsPage(channelBean.id)
         ),
-//         onTap: () {
-//           Fluttertoast.showToast(
-//               msg: channelBean.channel_name, gravity: ToastGravity.CENTER);
-// //          _getAllChannelList();
-//         },
       );
     }).toList();
   }

@@ -3,6 +3,7 @@ import 'package:viet_news_flutter/local/NewsLocalizationsDelegate.dart';
 import 'package:viet_news_flutter/page/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'page/WebViewPage.dart';
 
 void main() => runApp(new App());
 
@@ -23,7 +24,6 @@ class App extends StatelessWidget {
 //        backgroundColor: Colors.white,
         body: SplashPage(),
       ),
-
       //国际化
       localizationsDelegates: [
         //此处

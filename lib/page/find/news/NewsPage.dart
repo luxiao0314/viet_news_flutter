@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'package:dio/dio.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:viet_news_flutter/page/WebViewPage.dart';
+import 'package:viet_news_flutter/util/tools.dart';
 import 'package:viet_news_flutter/view/ContentListView.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
 import '../../../http/APIService.dart';
@@ -16,9 +17,11 @@ class NewsPage extends StatefulWidget {
   int count = 0;
   @override
   State<StatefulWidget> createState() => _NewsPageStatus();
+
 }
 
 class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
+
   @override
   Widget build(BuildContext context) {
     // final lists = widget.datas[widget.channelId.toString()];
@@ -49,6 +52,12 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
     _initializeData();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    print2("dispose", "isDispose = true");
+  }
+
   Future<void> _onRefresh(bool up) async {
     if(up) {
       widget.count = 1;
@@ -65,6 +74,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   Future<void> _getContentList([bool up]) async {
     final params = {"page_number": widget.count, "page_size": "10", "channel_id": 3};
     final response = await ApiService().getContentList(params);
+    print2("response", response);
     final result = ContentListResponse(response.data);
     setState(() {
       if (up != null) {
@@ -96,6 +106,15 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.content:
         // 跳转到内容页
+        saveWebDetailPresference(data.content.content_detail, data.content.content_title).then((_) {
+          Navigator.of(context).push(
+            new MaterialPageRoute(
+              builder: (context) => new WebViewPage()
+            )
+          );
+        }, onError: (error) {
+          print(error);
+        });
         break;
       case OnClickContentListType.coin:
         // 跳转到金币页
