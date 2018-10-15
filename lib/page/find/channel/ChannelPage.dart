@@ -73,8 +73,18 @@ class _ChannelPageStatus extends State<ChannelPage> {
                     _needShowClose = !_needShowClose;
                   });
                 },
-                child: Text(_needShowClose ? "完成" : '删除/排序',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black)),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 1.0),
+                      borderRadius: BorderRadius.circular(30.0)),
+                  child: Center(
+                    child: Text(_needShowClose ? "完成" : '删除/排序',
+                        style: TextStyle(fontSize: 13.0, color: Colors.black)),
+                  ),
+                  width: 80.0,
+                ),
               ),
             ))
           ],
@@ -159,7 +169,16 @@ class _ChannelPageStatus extends State<ChannelPage> {
                   Align(
                     alignment: Alignment.topRight,
                     child: _needShowClose && data.can_delete
-                        ? Icon(Icons.close)
+                        ? Container(
+                            height: 15.0,
+                            width: 15.0,
+                            child: ImageIcon(
+                              AssetImage(
+                                "images/ic_delete_channel.png",
+                              ),
+                              color: Color(0xffcccccc),
+                            ),
+                          )
                         : null,
                   )
                 ],
