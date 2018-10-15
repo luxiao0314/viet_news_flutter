@@ -23,41 +23,35 @@ class _SettingsPage extends State<SettingsPage> {
         backgroundColor: bg_white,
         elevation: 0.0,
       ),
-      body: ListView(
-        children: <Widget>[SettingsGroup(<Widget>[
-          CommonItem(
-            type: CommonItemType.modal,
-            label: Local.of(context).magic_num,
-            hasDetails: true,
-            onPress: () async {
-
-            },
-          ),
-          CommonItem(
-            type: CommonItemType.modal,
-            label: Local.of(context).nickname,
-            hasDetails: true,
-            onPress: () async {
-
-            },
-          ),
-          CommonItem(
-            type: CommonItemType.modal,
-            label: Local.of(context).phoneNum,
-            hasDetails: true,
-            onPress: () async {
-
-            },
-          ),
-          CommonItem(
-            type: CommonItemType.modal,
-            label: Local.of(context).password,
-            hasDetails: true,
-            onPress: () async {
-
-            },
-          ),
-        ])],
+      body: Column(
+        children: <Widget>[
+          SettingsGroup(<Widget>[
+            CommonItem(
+              type: CommonItemType.modal,
+              label: Local.of(context).magic_num,
+              hasDetails: true,
+              onPress: () async {},
+            ),
+            CommonItem(
+              type: CommonItemType.modal,
+              label: Local.of(context).nickname,
+              hasDetails: true,
+              onPress: () async {},
+            ),
+            CommonItem(
+              type: CommonItemType.modal,
+              label: Local.of(context).phoneNum,
+              hasDetails: true,
+              onPress: () async {},
+            ),
+            CommonItem(
+              type: CommonItemType.modal,
+              label: Local.of(context).password,
+              hasDetails: true,
+              onPress: () async {},
+            ),
+          ])
+        ],
       ),
     );
   }

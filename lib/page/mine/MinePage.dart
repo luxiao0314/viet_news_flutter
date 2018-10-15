@@ -99,7 +99,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
           backgroundColor: bg_white,
           elevation: 0.0,
         ),
-        body: ListView(
+        body: Column(
           children: <Widget>[
             userItem,
             SettingsGroup(<Widget>[
