@@ -161,7 +161,7 @@ class _ContentListViewState extends State<ContentListView> {
             onTap: () => widget.click(OnClickContentListType.coin, widget.data),
             child: Row(
               children: <Widget>[
-                _assetIcon("images/ic_content_list_coin.png"),
+                _assetIcon("images/ic_content_list_coin.png", OnClickContentListType.coin),
                 new Text("${widget.data.content.view_number}", style: text_style_14_gray)
               ],
             ),
@@ -170,7 +170,7 @@ class _ContentListViewState extends State<ContentListView> {
             onTap: () => widget.click(OnClickContentListType.like, widget.data),
             child: Row(
               children: <Widget>[
-                _assetIcon("images/ic_content_list_like.png"),
+                _assetIcon("images/ic_content_list_like.png", OnClickContentListType.like),
                 new Text("${widget.data.content.like_number}", style: text_style_14_gray)
               ],
             ),
@@ -179,7 +179,7 @@ class _ContentListViewState extends State<ContentListView> {
             onTap: () => widget.click(OnClickContentListType.collection, widget.data),
             child: Row(
               children: <Widget>[
-                _assetIcon("images/ic_content_list_collection.png"),
+                _assetIcon("images/ic_content_list_collection.png", OnClickContentListType.collection),
                 new Text("${widget.data.content.collection_number}", style: text_style_14_gray)
               ],
             ),
@@ -189,10 +189,35 @@ class _ContentListViewState extends State<ContentListView> {
     );
   }
 
-  _assetIcon(String path, {double width = 17.0, double height = 17.0, Color color = Colors.grey}) {
+  _assetIcon(String path, OnClickContentListType type, {double width = 17.0, double height = 17.0, Color color = Colors.grey}) {
+    Widget _assetIconGetImage() {
+      switch (type) {
+        case OnClickContentListType.like:
+          return Image.asset(
+            path, 
+            color: widget.data.content.like_flag ? Colors.red : color,
+            width: width, 
+            height: height
+          );
+        case OnClickContentListType.collection:
+        return Image.asset(
+            path, 
+            color: widget.data.content.collection_flag? Colors.red : color,
+            width: width, 
+            height: height
+          );
+        default: 
+        return Image.asset(
+            path, 
+            color: color,
+            width: width, 
+            height: height
+          );
+      }
+    }
     return new Container(
       padding: EdgeInsets.only(right: 5.0),
-      child:Image.asset(path, color: color, width: width, height: height)
+      child: _assetIconGetImage()
     );
   }
 

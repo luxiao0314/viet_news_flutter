@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
@@ -64,8 +65,6 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   Future<void> _getContentList([bool up]) async {
     final params = {"page_number": widget.count, "page_size": "10", "channel_id": 3};
     final response = await ApiService().getContentList(params);
-    print("response: $response");
-    print("channelId: ${widget.channelId}");
     final result = ContentListResponse(response.data);
     setState(() {
       if (up != null) {
@@ -75,8 +74,6 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
           widget._refreshController.sendBack(up, RefreshStatus.completed);
         } else {
           // 上拉加载更多
-          print(up);
-          print(result.data.list.length);
           if (result.data.list.length <= 0) {
             widget._refreshController.sendBack(up, RefreshStatus.noMore);
             return;
@@ -91,8 +88,39 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   // 点击头像名字 内容 金币 喜欢 收藏 事件
-  void _onClickContentList(OnClickContentListType type, ContentListResponseList data) {
+  Future<Null> _onClickContentList(OnClickContentListType type, ContentListResponseList data) async{
     print(type);
+    switch (type) {
+      case OnClickContentListType.header:
+        // 跳转到个人信息页面
+        break;
+      case OnClickContentListType.content:
+        // 跳转到内容页
+        break;
+      case OnClickContentListType.coin:
+        // 跳转到金币页
+        break;
+      case OnClickContentListType.like:
+        // 调用喜欢接口
+        final result = await ApiService().requestContentListLike(data.content.id.toString());
+        final jsonRes = json.decode(result.data);
+        if (jsonRes["message"].toString() == "success") {
+          data.content.like_flag = true;
+          data.content.like_number = jsonRes["data"];
+          setState(() {});
+        }
+        break;
+      case OnClickContentListType.collection:
+        // 调用收藏接口
+        final result = await ApiService().requestContentListCollection(data.content.id.toString());
+        final jsonRes = json.decode(result.data);
+        if (jsonRes["message"].toString() == "success") {
+          data.content.collection_flag = true;
+          data.content.collection_number = jsonRes["data"];
+          setState(() {});
+        }
+        break;
+    }
   }
 
 

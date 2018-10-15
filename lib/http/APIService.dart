@@ -12,13 +12,16 @@ class ApiService {
     _dio.options.baseUrl = 'http://magicbox.liaoyantech.cn/magicbox/api/';
   }
 
+  // 暂时写死，后期会改
+  final Map<String, String> headers = {
+    "Authorization":
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjEyMzQ1NiIsInJvbGVJZCI6IjEiLCJpc3MiOiJtZXJjdWxldCIsImV4cCI6MTUzOTc1NzAzMSwidXNlcklkIjoiMSIsImlhdCI6MTUzNzE2NTAzMX0.c-ur_v1vlO_E-oY5seiK18NfciiIxzXyhT20e9HCp8Q"
+  };
+
   Future<Response> getChannelList() => _dio.post("v1/channel/list");
 
   Future<Response> getAllChannelList() => _dio.post("v1/channel/allList",
-      options: Options(headers: {
-        "Authorization": //TODO(tsing) 先写死一个token，之后获取到了token再考虑怎么传过来 。
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjEyMzQ1NiIsInJvbGVJZCI6IjEiLCJpc3MiOiJtZXJjdWxldCIsImV4cCI6MTUzOTc1NzAzMSwidXNlcklkIjoiMSIsImlhdCI6MTUzNzE2NTAzMX0.c-ur_v1vlO_E-oY5seiK18NfciiIxzXyhT20e9HCp8Q"
-      }));
+      options: Options(headers: headers));
 
   /// 获取首页内容 根据不同的参数
   Future<Response> getContentList(dynamic params) => _dio.post(
@@ -30,4 +33,15 @@ class ApiService {
     )
   );
 
+  /// 用户给某一篇文章点赞
+  Future<Response> requestContentListLike(String id) => _dio.get(
+    "v1/content/like/$id",
+    options: Options(headers: headers)
+  );
+
+  /// 用户收藏一篇文章
+  Future<Response> requestContentListCollection(String id) => _dio.get(
+    "v1/content/collection/$id",
+    options: Options(headers: headers)
+  );
 }
