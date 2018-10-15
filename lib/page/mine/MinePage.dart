@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
+import 'package:viet_news_flutter/page/mine/SettingsPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
+import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/util/User.dart';
 import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/view/SettingsGroup.dart';
@@ -84,56 +86,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
       ),
     );
 
-//<<<<<<< HEAD
-//    Widget myWallet = new ListTile(
-//        leading: const Icon(Icons.favorite),
-//        title: Text(Local.of(context).my_wallet),
-//        trailing:
-//            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-//        onTap: () async {
-//          await User.currentUser.isLogin().then((isLogin) {
-//            if (isLogin) {
-//              router(LoginPage());
-//            } else {
-//              print('aaron login');
-//              router(LoginPage());
-//            }
-//          });
-//        });
-//
-//    Widget inviteFriends = new ListTile(
-//        leading: const Icon(Icons.info),
-//        title: Text(Local.of(context).invite_friends),
-//        trailing:
-//            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-//        onTap: () => router(LoginPage()));
-//
-//    Widget favorite = new ListTile(
-//        leading: const Icon(Icons.info),
-//        title: Text(Local.of(context).favorite),
-//        trailing:
-//            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-//        onTap: () => router(LoginPage()));
-//    Widget settings = new ListTile(
-//        leading: const Icon(Icons.info),
-//        title: Text(Local.of(context).settings),
-//        trailing:
-//            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-//        onTap: () => router(LoginPage()));
-//=======
-//>>>>>>> 6bca4e3213b860fa73ce565375aea38c732df301
-//    Widget logout = new ListTile(
-//        leading: const Icon(Icons.info),
-//        title: Text(Local.of(context).logout),
-//        trailing:
-//            Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-//        onTap: () async {
-//          User.currentUser.logout();
-//          setState(() {
-//            userName = null;
-//          });
-//        });
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     return Scaffold(
         appBar: AppBar(
           brightness: Brightness.light,
@@ -204,11 +157,11 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
                 hasDetails: true,
                 onPress: () async {
                   await User.currentUser.isLogin().then((isLogin) {
-                    if (isLogin) {
+                    if (false) {
                       router(LoginPage());
                     } else {
                       print('aaron login');
-                      router(LoginPage());
+                      router(SettingsPage());
                     }
                   });
                 },
