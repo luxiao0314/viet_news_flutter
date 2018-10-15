@@ -61,8 +61,8 @@ class SettingsGroup extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.only(
-                left: 15.0,
-                right: 15.0,
+                left: 16.0,
+                right: 16.0,
                 bottom: 6.0,
               ),
               child: header,
@@ -103,8 +103,8 @@ class SettingsGroup extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.only(
-                left: 15.0,
-                right: 15.0,
+                left: 16.0,
+                right: 16.0,
                 top: 7.5,
               ),
               child: footer,
@@ -115,7 +115,7 @@ class SettingsGroup extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: header == null ? 35.0 : 22.0,
+        top: 10.0,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

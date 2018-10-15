@@ -64,6 +64,7 @@ flutter:
     - images/ic_pencil.svg
     - images/ic_default_article.png
     - images/ic_error_article.png
+    - images/edit.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
-
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/dimens.dart';
+import 'package:viet_news_flutter/res/style.dart';
 
 enum CommonItemType {
   // Just on and off.
@@ -48,13 +48,13 @@ class CommonItemState extends State<CommonItem> {
       rowChildren.add(
         Padding(
           padding: const EdgeInsets.only(
-            left: 15.0,
+            left: left_right_margin,
             bottom: 2.0,
           ),
           child: Image.asset(
             'assets/${widget.iconAssetLabel}.png',
             package: 'ios_settings_icons',
-            height: 29.0,
+            height: icon_height,
           ),
         ),
       );
@@ -64,7 +64,7 @@ class CommonItemState extends State<CommonItem> {
     if (widget.subtitle == null) {
       titleSection = Padding(
         padding: EdgeInsets.only(top: 1.5),
-        child: Text(widget.label),
+        child: Text(widget.label,style: text_style_16_black),
       );
     } else {
       titleSection = Column(
@@ -88,7 +88,7 @@ class CommonItemState extends State<CommonItem> {
       Expanded(
         child: Padding(
           padding: const EdgeInsets.only(
-            left: 15.0,
+            left: left_right_margin,
           ),
           child: titleSection,
         ),
@@ -171,7 +171,7 @@ class CommonItemState extends State<CommonItem> {
           }
         },
         child: SizedBox(
-          height: widget.subtitle == null ? 44.0 : 57.0,
+          height: item_height,
           child: Row(
             children: rowChildren,
           ),
