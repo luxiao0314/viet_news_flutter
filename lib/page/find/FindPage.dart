@@ -61,11 +61,11 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
         child: Center(
           child: NewsPage(channelBean.id),
         ),
-        onTap: () {
-          Fluttertoast.showToast(
-              msg: channelBean.channel_name, gravity: ToastGravity.CENTER);
-//          _getAllChannelList();
-        },
+//         onTap: () {
+//           Fluttertoast.showToast(
+//               msg: channelBean.channel_name, gravity: ToastGravity.CENTER);
+// //          _getAllChannelList();
+//         },
       );
     }).toList();
   }

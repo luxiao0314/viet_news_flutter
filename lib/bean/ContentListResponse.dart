@@ -103,7 +103,16 @@ class ContentListResponseContent {
     version = jsonRes['version'];
     view_number = jsonRes['view_number'];
     collection_flag = jsonRes['collection_flag'];
-    like_flag = jsonRes['like_flag'];
+    if (jsonRes['collection_flag'] == null) {
+      collection_flag = false;
+    } else {
+      collection_flag = true;
+    }
+    if (jsonRes['like_flag'] == null) {
+      like_flag = false;
+    } else {
+      like_flag = true;
+    }
     content_detail = jsonRes['content_detail'];
     content_image = jsonRes['content_image'];
     content_title = jsonRes['content_title'];

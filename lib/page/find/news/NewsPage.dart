@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
-import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/view/ContentListView.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
-import 'package:viet_news_flutter/bean/ContentListResponse.dart';
+import '../../../http/APIService.dart';
 
 class NewsPage extends StatefulWidget {
   NewsPage(this.channelId);
@@ -21,25 +21,28 @@ class NewsPage extends StatefulWidget {
 class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final lists = widget.datas[widget.channelId.toString()];
+    // final lists = widget.datas[widget.channelId.toString()];
     return SmartRefresher(
       enablePullDown: true,
-      enablePullUp: false,
+      enablePullUp: true,
       onRefresh: _onRefresh,
       onOffsetChange: _onOffsetCallback,
       controller: widget._refreshController,
-      child: lists==null||lists.length == 0 ?
+      child: widget.datas[widget.channelId.toString()]==null||widget.datas[widget.channelId.toString()].length == 0 ?
           CustomScrollView() :
           ListView.builder(
             itemBuilder: (context, index) {
-              final data = lists[index];
-              return new ContentListView(data: data);
+              final data = widget.datas[widget.channelId.toString()][index];
+              return new ContentListView(
+                data: data,
+                click: (type, data) => _onClickContentList(type, data),
+              );
             },
-            itemCount: lists.length,
+            itemCount: widget.datas[widget.channelId.toString()].length,
       )
     );
   }
-
+  
   @override
   void initState() {
     super.initState();
@@ -48,36 +51,76 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
 
   Future<void> _onRefresh(bool up) async {
     if(up) {
-      widget.count++;
+      widget.count = 1;
     } else {
-      widget.count--;
+      widget.count++;
     }
-    _getChannelList(up);
+    _getContentList(up);
   }
 
   Future<void> _initializeData() async {
-    _getChannelList();
+    _getContentList();
   }
 
-  Future<void> _getChannelList([bool up]) async {
-    Options options = Options(
-      baseUrl: "http://magicbox.liaoyantech.cn:80/magicbox/api/v1/",
-      data: {"page_number": "1", "page_size": "10", "channel_id": 3},
-      headers: {"Authorization":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE1NjE4MTUwNjE1Iiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTM5NDE0NTExLCJ1c2VySWQiOiIxNCIsImlhdCI6MTUzNjgyMjUxMX0.FfR9nBnLqgeBBT2Ei0b88zSNJfDxm99KtO4Yf49DfbA"},
-      connectTimeout: 5000,
-      receiveTimeout: 5000,
-    );
-    final dio = Dio(options);
-    final response = await dio.post("content/list4Channel");
-    print("response: $response");
-    print("channelId: ${widget.channelId}");
+  Future<void> _getContentList([bool up]) async {
+    final params = {"page_number": widget.count, "page_size": "10", "channel_id": 3};
+    final response = await ApiService().getContentList(params);
     final result = ContentListResponse(response.data);
     setState(() {
-      widget.datas[widget.channelId.toString()] = result.data.list;
       if (up != null) {
-        widget._refreshController.sendBack(up, RefreshStatus.completed);
+        if (up) {
+          // 下拉刷新更多数据
+          widget.datas[widget.channelId.toString()].insertAll(0, result.data.list);
+          widget._refreshController.sendBack(up, RefreshStatus.completed);
+        } else {
+          // 上拉加载更多
+          if (result.data.list.length <= 0) {
+            widget._refreshController.sendBack(up, RefreshStatus.noMore);
+            return;
+          }
+          widget.datas[widget.channelId.toString()].addAll(result.data.list);
+          widget._refreshController.sendBack(up, RefreshStatus.idle);
+        }
+      } else {
+        widget.datas[widget.channelId.toString()] = result.data.list;
       }
     });
+  }
+
+  // 点击头像名字 内容 金币 喜欢 收藏 事件
+  Future<Null> _onClickContentList(OnClickContentListType type, ContentListResponseList data) async{
+    print(type);
+    switch (type) {
+      case OnClickContentListType.header:
+        // 跳转到个人信息页面
+        break;
+      case OnClickContentListType.content:
+        // 跳转到内容页
+        break;
+      case OnClickContentListType.coin:
+        // 跳转到金币页
+        break;
+      case OnClickContentListType.like:
+        // 调用喜欢接口
+        final result = await ApiService().requestContentListLike(data.content.id.toString());
+        final jsonRes = json.decode(result.data);
+        if (jsonRes["message"].toString() == "success") {
+          data.content.like_flag = true;
+          data.content.like_number = jsonRes["data"];
+          setState(() {});
+        }
+        break;
+      case OnClickContentListType.collection:
+        // 调用收藏接口
+        final result = await ApiService().requestContentListCollection(data.content.id.toString());
+        final jsonRes = json.decode(result.data);
+        if (jsonRes["message"].toString() == "success") {
+          data.content.collection_flag = true;
+          data.content.collection_number = jsonRes["data"];
+          setState(() {});
+        }
+        break;
+    }
   }
 
 
