@@ -55,7 +55,7 @@ class _RegisterStatus extends State<RegisterPage> {
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 color: Colors.red[500],
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast("获取验证码"),
+                onPressed: () => toast(context, "获取验证码"),
                 minSize: 13.0,
                 child: Text(
                   "获取验证码",
@@ -79,7 +79,7 @@ class _RegisterStatus extends State<RegisterPage> {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-              onPressed: () => toast("下一步"),
+              onPressed: () => toast(context, "下一步"),
               minSize: 13.0,
               child: Text(
                 "下一步",

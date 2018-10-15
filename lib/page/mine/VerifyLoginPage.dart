@@ -22,10 +22,10 @@ class _VerifyStatus extends State<VerifyLoginPage> {
                   padding: EdgeInsets.only(right: 10.0), child: Text("+86")),
               Expanded(
                   child: TextField(
-                    controller: _controller,
-                    decoration:
+                controller: _controller,
+                decoration:
                     InputDecoration(hintText: '手机号', border: InputBorder.none),
-                  ))
+              ))
             ],
           ),
           Divider(),
@@ -40,16 +40,16 @@ class _VerifyStatus extends State<VerifyLoginPage> {
                   )),
               Expanded(
                   child: CupertinoButton(
-                    padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-                    color: Colors.red[500],
-                    borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                    onPressed: () => toast("获取验证码"),
-                    minSize: 13.0,
-                    child: Text(
-                      "获取验证码",
-                      style: TextStyle(color: Colors.white, fontSize: 13.0),
-                    ),
-                  ))
+                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                color: Colors.red[500],
+                borderRadius: const BorderRadius.all(Radius.circular(60.0)),
+                onPressed: () => toast(context, "获取验证码"),
+                minSize: 13.0,
+                child: Text(
+                  "获取验证码",
+                  style: TextStyle(color: Colors.white, fontSize: 13.0),
+                ),
+              ))
             ],
           ),
           Divider(),
@@ -61,7 +61,7 @@ class _VerifyStatus extends State<VerifyLoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-              onPressed: () => toast("登录"),
+              onPressed: () => toast(context, "登录"),
               minSize: 13.0,
               child: Text(
                 "登录",
