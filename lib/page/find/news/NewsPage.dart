@@ -32,7 +32,10 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
           ListView.builder(
             itemBuilder: (context, index) {
               final data = widget.datas[widget.channelId.toString()][index];
-              return new ContentListView(data: data);
+              return new ContentListView(
+                data: data,
+                click: (type, data) => _onClickContentList(type, data),
+              );
             },
             itemCount: widget.datas[widget.channelId.toString()].length,
       )
@@ -85,6 +88,11 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         widget.datas[widget.channelId.toString()] = result.data.list;
       }
     });
+  }
+
+  // 点击头像名字 内容 金币 喜欢 收藏 事件
+  void _onClickContentList(OnClickContentListType type, ContentListResponseList data) {
+    print(type);
   }
 
 
