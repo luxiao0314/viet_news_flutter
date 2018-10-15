@@ -15,12 +15,7 @@ class ChannelPage extends StatefulWidget {
 }
 
 class _ChannelPageStatus extends State<ChannelPage> {
-  var _canDrag = false; //当前是否可拖动排序
-
-//  @override
-//  void initState() {
-//    super.initState();
-//  }
+  var _needShowClose = false; //当前是否显示关闭的XX按钮
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +67,10 @@ class _ChannelPageStatus extends State<ChannelPage> {
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
                 onPressed: () {
                   setState(() {
-                    _canDrag = !_canDrag;
+                    _needShowClose = !_needShowClose;
                   });
                 },
-                child: Text(_canDrag ? "完成" : '删除/排序',
+                child: Text(_needShowClose ? "完成" : '删除/排序',
                     style: TextStyle(fontSize: 13.0, color: Colors.black)),
               ),
             ))
@@ -123,18 +118,18 @@ class _ChannelPageStatus extends State<ChannelPage> {
           return newIndex != 0 && oldIndex != 0;
         },
         onDragStarted: () {
-          setState(() {
-            _canDrag = true;
-          });
+          if (!_needShowClose) {
+            _needShowClose = true;
+            setState(() {});
+          }
         },
         itemBuilder: (context, data) {
           return GestureDetector(
               onTap: () {
-                if (_canDrag && widget.followList.indexOf(data) != 0) {
-                  setState(() {
-                    widget.followList.remove(data);
-                    widget.unFollowList.add(data);
-                  });
+                if (_needShowClose && widget.followList.indexOf(data) != 0) {
+                  widget.followList.remove(data);
+                  widget.unFollowList.add(data);
+                  setState(() {});
                 }
               },
               child: Stack(
@@ -157,9 +152,10 @@ class _ChannelPageStatus extends State<ChannelPage> {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child: _canDrag && widget.followList.indexOf(data) != 0
-                        ? Icon(Icons.close)
-                        : null,
+                    child:
+                        _needShowClose && widget.followList.indexOf(data) != 0
+                            ? Icon(Icons.close)
+                            : null,
                   )
                 ],
               ));
