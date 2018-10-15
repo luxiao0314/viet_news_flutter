@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
-import 'package:viet_news_flutter/res/colors.dart';
 
 typedef void OnNextClickListener();
 
@@ -54,7 +53,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 color: Colors.red[500],
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast("获取验证码"),
+                onPressed: () => toast(context, "获取验证码"),
                 minSize: 13.0,
                 child: Text(
                   "获取验证码",
