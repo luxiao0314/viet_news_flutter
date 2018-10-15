@@ -18,4 +18,5 @@ const Color text_gray = Color(0xFF4A4A4A);
 const Color text_light_gray = Color(0xFF9B9B9B);
 const Color btn_blue = Color(0xFF3B5997);
 const Color tips_blue = Color(0xFFF5F7F9);
+const Color text_blue = Color(0xFF748EC5);
 

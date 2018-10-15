@@ -84,14 +84,10 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
         onTap: () async {
           await User.currentUser.isLogin().then((isLogin) {
             if (isLogin) {
-              Navigator.of(context)
-                  .push(new MaterialPageRoute(builder: (context) {
-                return new LoginPage();
-              }));
+              router(LoginPage());
             } else {
               print('aaron login');
-              Navigator.of(context).push(
-                  new MaterialPageRoute(builder: (context) => new LoginPage()));
+              router(LoginPage());
             }
           });
         });
@@ -101,32 +97,20 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
         title: Text(Local.of(context).invite_friends),
         trailing:
             Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-        onTap: () {
-          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-            return new LoginPage();
-          }));
-        });
+        onTap: () => router(LoginPage()));
 
     Widget favorite = new ListTile(
         leading: const Icon(Icons.info),
         title: Text(Local.of(context).favorite),
         trailing:
             Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-        onTap: () {
-          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-            return new LoginPage();
-          }));
-        });
+        onTap: () => router(LoginPage()));
     Widget settings = new ListTile(
         leading: const Icon(Icons.info),
         title: Text(Local.of(context).settings),
         trailing:
             Icon(Icons.chevron_right, color: Theme.of(context).accentColor),
-        onTap: () {
-          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-            return new LoginPage();
-          }));
-        });
+        onTap: () => router(LoginPage()));
     Widget logout = new ListTile(
         leading: const Icon(Icons.info),
         title: Text(Local.of(context).logout),
@@ -163,5 +147,12 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
 
 //
         );
+  }
+
+  router(Widget widget) {
+    Navigator.of(context, rootNavigator: true)
+        .push(new MaterialPageRoute(builder: (context) {
+      return widget;
+    }));
   }
 }
