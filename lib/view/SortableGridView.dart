@@ -49,7 +49,7 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
   void initState() {
     super.initState();
     dataList = widget.dataList;
-    dataListBackup = dataList.sublist(0);
+//    dataListBackup = dataList.sublist(0);
   }
 
   @override
@@ -97,7 +97,8 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
               willAcceptIndex = -1;
               setState(() {
                 showItemWhenCovered = false;
-                dataList = dataListBackup.sublist(0);
+                dataList.clear();
+                dataList.addAll(dataListBackup.sublist(0));
               });
             },
             //接下来松手 是否需要将数据给这个widget？  因为需要在拖动时改变UI，所以在这里直接修改数据源
@@ -108,7 +109,8 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
               if (accept) {
                 willAcceptIndex = index;
                 showItemWhenCovered = true;
-                dataList = dataListBackup.sublist(0);
+                dataList.clear();
+                dataList.addAll(dataListBackup.sublist(0));
                 final fromData = dataList[fromIndex];
                 setState(() {
                   dataList.removeAt(fromIndex);
@@ -133,7 +135,9 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
             setState(() {
               willAcceptIndex = -1;
               showItemWhenCovered = false;
-              dataList = dataListBackup.sublist(0);
+              dataList.clear();
+              dataList.addAll(dataListBackup.sublist(0));
+              dataListBackup.clear();
             });
           },
           onDragCompleted: () {
@@ -142,6 +146,7 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
             setState(() {
               showItemWhenCovered = false;
               willAcceptIndex = -1;
+              dataListBackup.clear();
             });
           },
           //用户拖动item时，那个给用户看起来被拖动的widget，（就是会跟着用户走的那个widget）
