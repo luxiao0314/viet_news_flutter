@@ -19,4 +19,15 @@ class ApiService {
         "Authorization": //TODO(tsing) 先写死一个token，之后获取到了token再考虑怎么传过来 。
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjEyMzQ1NiIsInJvbGVJZCI6IjEiLCJpc3MiOiJtZXJjdWxldCIsImV4cCI6MTUzOTc1NzAzMSwidXNlcklkIjoiMSIsImlhdCI6MTUzNzE2NTAzMX0.c-ur_v1vlO_E-oY5seiK18NfciiIxzXyhT20e9HCp8Q"
       }));
+
+  /// 获取首页内容 根据不同的参数
+  Future<Response> getContentList(dynamic params) => _dio.post(
+    "v1/content/list4Channel", 
+    options: Options(
+      data: params,
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
+    )
+  );
+
 }

@@ -61,8 +61,12 @@ class _ContentListViewState extends State<ContentListView> {
         contentPadding: EdgeInsets.all(0.0),
         leading: Row(
           children: <Widget>[
-            new CircleAvatar(
-              backgroundImage: NetworkImage(widget.data.author.avatar),
+            Container(
+              width: 22.0,
+              height: 22.0,
+              child: new CircleAvatar(
+                backgroundImage: NetworkImage(widget.data.author.avatar),
+              ),
             ),
             Container(
               padding: EdgeInsets.only(left: 10.0),
