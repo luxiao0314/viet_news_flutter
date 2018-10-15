@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
-import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/util/User.dart';
+import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/view/SettingsGroup.dart';
 
 class MinePage extends StatefulWidget {
@@ -132,9 +133,10 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
 //            userName = null;
 //          });
 //        });
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
         appBar: AppBar(
+          brightness: Brightness.light,
           title: Text(Local.of(context).mine,
               style: Theme.of(context)
                   .textTheme
