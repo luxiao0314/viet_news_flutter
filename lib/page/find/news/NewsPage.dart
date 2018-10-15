@@ -23,7 +23,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
     // final lists = widget.datas[widget.channelId.toString()];
     return SmartRefresher(
       enablePullDown: true,
-      enablePullUp: false,
+      enablePullUp: true,
       onRefresh: _onRefresh,
       onOffsetChange: _onOffsetCallback,
       controller: widget._refreshController,
@@ -47,27 +47,42 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
 
   Future<void> _onRefresh(bool up) async {
     if(up) {
-      widget.count++;
+      widget.count = 1;
     } else {
-      widget.count--;
+      widget.count++;
     }
-    _getChannelList(up);
+    _getContentList(up);
   }
 
   Future<void> _initializeData() async {
-    _getChannelList();
+    _getContentList();
   }
 
-  Future<void> _getChannelList([bool up]) async {
-    final params = {"page_number": "1", "page_size": "10", "channel_id": 3};
+  Future<void> _getContentList([bool up]) async {
+    final params = {"page_number": widget.count, "page_size": "10", "channel_id": 3};
     final response = await ApiService().getContentList(params);
     print("response: $response");
     print("channelId: ${widget.channelId}");
     final result = ContentListResponse(response.data);
     setState(() {
-      widget.datas[widget.channelId.toString()] = result.data.list;
       if (up != null) {
-        widget._refreshController.sendBack(up, RefreshStatus.completed);
+        if (up) {
+          // 下拉刷新更多数据
+          widget.datas[widget.channelId.toString()].insertAll(0, result.data.list);
+          widget._refreshController.sendBack(up, RefreshStatus.completed);
+        } else {
+          // 上拉加载更多
+          print(up);
+          print(result.data.list.length);
+          if (result.data.list.length <= 0) {
+            widget._refreshController.sendBack(up, RefreshStatus.noMore);
+            return;
+          }
+          widget.datas[widget.channelId.toString()].addAll(result.data.list);
+          widget._refreshController.sendBack(up, RefreshStatus.idle);
+        }
+      } else {
+        widget.datas[widget.channelId.toString()] = result.data.list;
       }
     });
   }
