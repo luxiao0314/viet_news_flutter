@@ -1,12 +1,14 @@
 import 'package:flutter/widgets.dart';
 
 typedef bool CanAccept(int oldIndex, int newIndex);
+typedef bool CanDrag(int index);
 
 typedef Widget DataWidgetBuilder<T>(BuildContext context, T data);
 
 class SortableGridView<T> extends StatefulWidget {
   final DataWidgetBuilder<T> itemBuilder;
   final CanAccept canAccept;
+  final CanDrag canDrag;
   final List<T> dataList;
   final int crossAxisCount;
   final Axis scrollDirection;
@@ -29,6 +31,7 @@ class SortableGridView<T> extends StatefulWidget {
     this.mainAxisSpacing = 0.0,
     this.crossAxisSpacing = 0.0,
     this.childAspectRatio = 1.0,
+    this.canDrag,
     @required this.itemBuilder,
     @required this.canAccept,
   })  : assert(itemBuilder != null),
@@ -80,6 +83,8 @@ class _SortableGridViewState<T> extends State<SortableGridView> {
     return LayoutBuilder(
       builder: (context, constraint) {
         return LongPressDraggable(
+          maxSimultaneousDrags:
+              widget.canDrag == null ? 1 : widget.canDrag(index) ? 1 : 0,
           data: index,
           child: DragTarget<int>(
             //松手时 如果onWillAccept返回true 那么久会调用，本案例不使用。

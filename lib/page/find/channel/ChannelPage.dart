@@ -28,7 +28,7 @@ class _ChannelPageStatus extends State<ChannelPage> {
             child: Container(
               alignment: Alignment.centerRight,
               child: MyCloseButton(
-                result: "result",
+                result: widget.followList,
               ),
             ),
           ),
@@ -116,9 +116,12 @@ class _ChannelPageStatus extends State<ChannelPage> {
         childAspectRatio: 2.5,
         crossAxisCount: 3,
         scrollDirection: Axis.vertical,
+        canDrag: (index) => widget.followList[index].can_delete,
         canAccept: (oldIndex, newIndex) {
           print('newIndex: $newIndex canAccept oldIndex: $oldIndex');
-          return newIndex != 0 && oldIndex != 0;
+
+          return widget.followList[oldIndex].can_delete &&
+              widget.followList[newIndex].can_delete;
         },
         onDragStarted: () {
           if (!_needShowClose) {
@@ -129,7 +132,7 @@ class _ChannelPageStatus extends State<ChannelPage> {
         itemBuilder: (context, data) {
           return GestureDetector(
               onTap: () {
-                if (_needShowClose && widget.followList.indexOf(data) != 0) {
+                if (_needShowClose && data.can_delete) {
                   widget.followList.remove(data);
                   widget.unFollowList.add(data);
                   setState(() {});

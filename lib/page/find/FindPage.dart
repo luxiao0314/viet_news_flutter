@@ -4,7 +4,6 @@ import 'package:viet_news_flutter/bean/AllChannelListResponse.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/local/Local.dart';
-import 'package:viet_news_flutter/manager/Toast.dart';
 import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
 import 'package:viet_news_flutter/page/find/news/NewsPage.dart';
@@ -57,9 +56,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
   List<Widget> _getTabViewPages() {
     return tabList.map((channelBean) {
       return GestureDetector(
-        child: Center(
-          child: NewsPage(channelBean.id)
-        ),
+        child: Center(child: NewsPage(channelBean.id)),
       );
     }).toList();
   }
@@ -143,12 +140,49 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
         channelAllListResponse.data.unFollowChannelList != null &&
         channelAllListResponse.data.followChannelList != null) {
       final result = await Navigator.of(context, rootNavigator: true)
-          .push(MaterialPageRoute<String>(builder: (context) {
+          .push(MaterialPageRoute<List<ChannelBean>>(builder: (context) {
         return ChannelPage(
             followList: channelAllListResponse.data.followChannelList,
             unFollowList: channelAllListResponse.data.unFollowChannelList);
       }));
-      Toast.toast(context, result == null ? "asd" : result);
+      //频道没有变化 ，UI也不需要变化
+      if (result.length == tabList.length) {
+        var flag = true;
+        for (var i = 0; i < result.length; ++i) {
+          var originBean = tabList[i];
+          var newBean = result[i];
+          if (originBean.id != newBean.id) {
+            flag = false;
+            break;
+          }
+        }
+        if (flag) {
+          return;
+        }
+      }
+      tabList.clear();
+      setState(() {
+        tabList.addAll(result);
+        setState(() {
+          _controller = TabController(length: tabList.length, vsync: this);
+          _controller.addListener(() {
+            _currentTab = _controller.index;
+          });
+        });
+        //  请求接口保存频道顺序。 "v1/channel/updateSort"
+        _updateSort();
+      });
     }
+  }
+
+  void _updateSort() async {
+    final params = {
+      "channel_list": tabList.map((ChannelBean bean) {
+        return {"channel_id": bean.id.toString()};
+      }).toList()
+    };
+    final response = await ApiService().updateChannelSort(params);
+    print(response);
+    //TODO 对请求结果做处理，例如 保存成功 等..
   }
 }
