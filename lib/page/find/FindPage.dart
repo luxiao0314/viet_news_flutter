@@ -178,6 +178,6 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     };
     Fetch.init.post(ApiService.channelList, data: params).then((resData) {
       //TODO 对请求结果做处理，例如 保存成功 等..
-    });
+    }).catchError((error) => print("error: $error"));
   }
 }

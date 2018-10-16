@@ -68,11 +68,17 @@ class Fetch {
   }
 
   Future<dynamic> get(String path, {dynamic data}) async {
-    return dio.get(path, data: data).then(_checkStatus);
+    return dio
+        .get(path, data: data)
+        .then(_checkStatus)
+        .catchError((error) => print("error: $error"));
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    return dio.post(path, data: data).then(_checkStatus);
+    return dio
+        .post(path, data: data)
+        .then(_checkStatus)
+        .catchError((error) => print("error: $error"));
   }
 
   Future<dynamic> _checkStatus(Response response) async {
