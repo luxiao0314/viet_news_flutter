@@ -44,7 +44,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
             image: DecorationImage(
               image: NetworkImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539670545988&di=212c1e62dc572f28bd4bef575e96a6d3&imgtype=0&src=http%3A%2F%2Fwww.qqpk.cn%2FArticle%2FUploadFiles%2F201111%2F20111121100026559.jpg"),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.src)
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.colorBurn)
             )
           ),
           child: Column(
@@ -55,7 +55,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 child: new Align(
                   alignment: Alignment.centerLeft,
                   child: new CupertinoButton(
-                    child: Icon(Icons.arrow_back, color: Colors.black),
+                    child: Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -85,11 +85,11 @@ class _UserInfoPageState extends State<UserInfoPage> {
                           child: new Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("李晓明"),
+                              Text("李晓明", style: TextStyle(color: Colors.white)),
                               Row(
                                 children: <Widget>[
                                   Icon(Icons.color_lens, color: Colors.yellow),
-                                  Text("10.67w")
+                                  Text("10.67w", style: TextStyle(color: Colors.white))
                                 ],
                               ),
                             ],
@@ -107,7 +107,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                       borderRadius: BorderRadius.all(Radius.circular(27.0/2)),
                     ),
                     child: new CupertinoButton(
-                      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                      padding: EdgeInsets.symmetric(vertical: 2.0),
                       child: new Text("+ 关注", style: TextStyle(fontSize: 13.0, color: Colors.white)),
                       onPressed: null
                     ),

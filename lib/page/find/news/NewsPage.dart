@@ -16,8 +16,6 @@ class NewsPage extends StatefulWidget {
 
   final int channelId;
 
-//  final Map<String, List<ContentListResponseList>> datas = Map();
-
   @override
   State<StatefulWidget> createState() => _NewsPageStatus();
 }
@@ -36,7 +34,6 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // final lists = newsShare.datas[widget.channelId.toString()];
     print("newsPage build ${datas.length}");
     return SmartRefresher(
         enablePullDown: true,
@@ -111,19 +108,14 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
     switch (type) {
       case OnClickContentListType.header:
         // 跳转到个人信息页面
-        Navigator.of(context).push(
+        Navigator.of(context, rootNavigator: true).push(
             new MaterialPageRoute(builder: (context) => new UserInfoPage()));
         break;
       case OnClickContentListType.content:
         // 跳转到内容页
-        saveWebDetailPresference(
-                data.content.content_detail, data.content.content_title)
-            .then((_) {
-          Navigator.of(context).push(
-              new MaterialPageRoute(builder: (context) => new WebViewPage()));
-        }, onError: (error) {
-          print(error);
-        });
+        Navigator.of(context, rootNavigator: true).push(
+            new MaterialPageRoute(builder: (context) => new WebViewPage(
+              url: data.content.content_detail, title:data.content.content_title)));
         break;
       case OnClickContentListType.coin:
         // 跳转到金币页

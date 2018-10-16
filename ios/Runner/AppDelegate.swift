@@ -1,7 +1,7 @@
 import UIKit
 import Flutter
 
-let MethodChannelName = "com.mw.viet_flutter_news"
+let MethodChannelName = "com.mw.viet_flutter_news/channel"
 let GetStatusBarHeight = "getStatusBarHeight"
 
 @UIApplicationMain
@@ -10,7 +10,7 @@ let GetStatusBarHeight = "getStatusBarHeight"
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
         ) -> Bool {
-        //GeneratedPluginRegistrant.register(with: self)
+        GeneratedPluginRegistrant.register(with: self)
         guard let controller = self.window.rootViewController as? FlutterViewController else {
             preconditionFailure("controller initialize failure")
         }
