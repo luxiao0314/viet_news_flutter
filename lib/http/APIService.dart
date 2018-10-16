@@ -1,6 +1,11 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
+
+  static final String sendSMS = "v1/login/sendSms";
+  static final String register = "v1/login/register";
+  static final String list4Channel = "v1/content/list4Channel";
+
   static final ApiService _singleton = ApiService._internal();
   factory ApiService() {
     return _singleton;
