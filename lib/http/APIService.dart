@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-
   static final String sendSMS = "v1/login/sendSms";
   static final String register = "v1/login/register";
   static final String list4Channel = "v1/content/list4Channel";
@@ -48,6 +47,16 @@ class ApiService {
   /// 提交频道排序结果
   Future<Response> updateChannelSort(dynamic params) =>
       _dio.post("v1/channel/updateSort",
+          options: Options(
+            headers: headers,
+            data: params,
+            connectTimeout: 5000,
+            receiveTimeout: 5000,
+          ));
+
+  /// 获取关注列表
+  Future<Response> getFollowList(dynamic params) =>
+      _dio.post("v1/content/list4follow",
           options: Options(
             headers: headers,
             data: params,
