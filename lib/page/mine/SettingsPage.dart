@@ -55,7 +55,7 @@ class _SettingsPage extends State<SettingsPage> {
             ),
           ),
           Container(
-              padding: EdgeInsets.only(left: 5.0, right: 8.5),
+              padding: EdgeInsets.only(left: 5.0, right: arrow_margin_right),
               child: Icon(
                 CupertinoIcons.forward,
                 color: mediumGrayColor,
