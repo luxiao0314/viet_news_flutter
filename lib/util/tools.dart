@@ -27,4 +27,4 @@ void print2(String title, dynamic content) {
 }
 
 const String methodChannelName = "com.mw.viet_flutter_news";
-const String getStatusBarHeight = "getStatusBarHeight";
+const String channel_getStatusBarHeight = "getStatusBarHeight";
