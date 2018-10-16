@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
+
+  //测试环境
+  static final String baseUrl = "http://magicbox.liaoyantech.cn/magicbox/api/";
+
   ///发送短信
   static final String sendSMS = "v1/login/sendSms";
 
