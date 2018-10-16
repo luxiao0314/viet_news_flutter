@@ -12,7 +12,8 @@ import '../../../http/APIService.dart';
 class NewsPage extends StatefulWidget {
   NewsPage(this.channelId);
   final int channelId;
-  final Map<String, List<ContentListResponseList>> datas = Map();
+//  final Map<String, List<ContentListResponseList>> datas = Map();
+  final newsShare = NewsShare();
   final _refreshController = RefreshController();
   int count = 0;
   @override
@@ -23,33 +24,35 @@ class NewsPage extends StatefulWidget {
 class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
 
   @override
+  void initState() {
+    super.initState();
+    _initializeData();
+    print("newsPage initState");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // final lists = widget.datas[widget.channelId.toString()];
+    // final lists = widget.newsShare.datas[widget.channelId.toString()];
+    print("newsPage build ${widget.newsShare.datas.length}");
     return SmartRefresher(
       enablePullDown: true,
       enablePullUp: true,
       onRefresh: _onRefresh,
       onOffsetChange: _onOffsetCallback,
       controller: widget._refreshController,
-      child: widget.datas[widget.channelId.toString()]==null||widget.datas[widget.channelId.toString()].length == 0 ?
+      child: widget.newsShare.datas[widget.channelId.toString()]==null||widget.newsShare.datas[widget.channelId.toString()].length == 0 ?
           CustomScrollView() :
           ListView.builder(
             itemBuilder: (context, index) {
-              final data = widget.datas[widget.channelId.toString()][index];
+              final data = widget.newsShare.datas[widget.channelId.toString()][index];
               return new ContentListView(
                 data: data,
                 click: (type, data) => _onClickContentList(type, data),
               );
             },
-            itemCount: widget.datas[widget.channelId.toString()].length,
+            itemCount: widget.newsShare.datas[widget.channelId.toString()].length,
       )
     );
-  }
-  
-  @override
-  void initState() {
-    super.initState();
-    _initializeData();
   }
 
   @override
@@ -80,7 +83,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
       if (up != null) {
         if (up) {
           // 下拉刷新更多数据
-          widget.datas[widget.channelId.toString()].insertAll(0, result.data.list);
+          widget.newsShare.datas[widget.channelId.toString()].insertAll(0, result.data.list);
           widget._refreshController.sendBack(up, RefreshStatus.completed);
         } else {
           // 上拉加载更多
@@ -88,11 +91,11 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
             widget._refreshController.sendBack(up, RefreshStatus.noMore);
             return;
           }
-          widget.datas[widget.channelId.toString()].addAll(result.data.list);
+          widget.newsShare.datas[widget.channelId.toString()].addAll(result.data.list);
           widget._refreshController.sendBack(up, RefreshStatus.idle);
         }
       } else {
-        widget.datas[widget.channelId.toString()] = result.data.list;
+        widget.newsShare.datas[widget.channelId.toString()] = result.data.list;
       }
     });
   }
