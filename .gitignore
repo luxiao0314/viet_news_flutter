@@ -5,5 +5,8 @@
 .pub/
 .idea
 build/
-
+pubspec.lock
 .flutter-plugins
+Podfile.lock
+IDEWorkspaceChecks.plist
+WorkspaceSettings.xcsettings

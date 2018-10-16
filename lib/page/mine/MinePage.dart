@@ -7,7 +7,6 @@ import 'package:viet_news_flutter/page/mine/SettingsPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
-import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/util/User.dart';
 import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/view/SettingsGroup.dart';
@@ -86,7 +85,6 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
       ),
     );
 
-
     return Scaffold(
         appBar: AppBar(
           brightness: Brightness.light,
@@ -102,71 +100,74 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
         body: Column(
           children: <Widget>[
             userItem,
-            SettingsGroup(<Widget>[
-              CommonItem(
-                type: CommonItemType.modal,
-                label: Local.of(context).my_wallet,
-                hasDetails: true,
-                onPress: () async {
-                  await User.currentUser.isLogin().then((isLogin) {
-                    if (isLogin) {
-                      Navigator.of(context)
-                          .push(new MaterialPageRoute(builder: (context) {
-                        return new LoginPage();
-                      }));
-                    } else {
-                      print('aaron login');
-                      router(LoginPage());
-                    }
-                  });
-                },
-              ),
-              CommonItem(
-                type: CommonItemType.modal,
-                label: Local.of(context).invite_friends,
-                hasDetails: true,
-                onPress: () async {
-                  await User.currentUser.isLogin().then((isLogin) {
-                    if (isLogin) {
-                      router(LoginPage());
-                    } else {
-                      print('aaron login');
-                      router(LoginPage());
-                    }
-                  });
-                },
-              ),
-              CommonItem(
-                type: CommonItemType.modal,
-                label: Local.of(context).favorite,
-                hasDetails: true,
-                onPress: () async {
-                  await User.currentUser.isLogin().then((isLogin) {
-                    if (isLogin) {
-                      router(LoginPage());
-                    } else {
-                      print('aaron login');
-                      router(LoginPage());
-                    }
-                  });
-                },
-              ),
-              CommonItem(
-                type: CommonItemType.modal,
-                label: Local.of(context).settings,
-                hasDetails: true,
-                onPress: () async {
-                  await User.currentUser.isLogin().then((isLogin) {
-                    if (false) {
-                      router(LoginPage());
-                    } else {
-                      print('aaron login');
-                      router(SettingsPage());
-                    }
-                  });
-                },
-              ),
-            ])
+            Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: SettingsGroup(<Widget>[
+                CommonItem(
+                  type: CommonItemType.modal,
+                  label: Local.of(context).my_wallet,
+                  hasDetails: true,
+                  onPress: () async {
+                    await User.currentUser.isLogin().then((isLogin) {
+                      if (isLogin) {
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return new LoginPage();
+                        }));
+                      } else {
+                        print('aaron login');
+                        router(LoginPage());
+                      }
+                    });
+                  },
+                ),
+                CommonItem(
+                  type: CommonItemType.modal,
+                  label: Local.of(context).invite_friends,
+                  hasDetails: true,
+                  onPress: () async {
+                    await User.currentUser.isLogin().then((isLogin) {
+                      if (isLogin) {
+                        router(LoginPage());
+                      } else {
+                        print('aaron login');
+                        router(LoginPage());
+                      }
+                    });
+                  },
+                ),
+                CommonItem(
+                  type: CommonItemType.modal,
+                  label: Local.of(context).favorite,
+                  hasDetails: true,
+                  onPress: () async {
+                    await User.currentUser.isLogin().then((isLogin) {
+                      if (isLogin) {
+                        router(LoginPage());
+                      } else {
+                        print('aaron login');
+                        router(LoginPage());
+                      }
+                    });
+                  },
+                ),
+                CommonItem(
+                  type: CommonItemType.modal,
+                  label: Local.of(context).settings,
+                  hasDetails: true,
+                  onPress: () async {
+                    await User.currentUser.isLogin().then((isLogin) {
+                      if (false) {
+                        router(LoginPage());
+                      } else {
+                        print('aaron login');
+                        router(SettingsPage());
+                      }
+                    });
+                  },
+                ),
+              ]),
+            )
           ],
         ));
   }

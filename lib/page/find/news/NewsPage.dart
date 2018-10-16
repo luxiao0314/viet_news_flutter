@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/page/WebViewPage.dart';
 import 'package:viet_news_flutter/page/find/news/UserInfoPage.dart';
 import 'package:viet_news_flutter/util/tools.dart';
@@ -79,9 +80,9 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
 
   Future<void> _getContentList([bool up]) async {
     final params = {"page_number": count, "page_size": "10", "channel_id": 3};
-    final response = await ApiService().getContentList(params);
-    print2("response", response);
-    final result = ContentListResponse(response.data);
+    final response =
+        await Fetch.init.post(ApiService.list4Channel, data: params);
+    final result = ContentListResponse(response);
     setState(() {
       if (up != null) {
         if (up) {
@@ -129,9 +130,9 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.like:
         // 调用喜欢接口
-        final result = await ApiService()
-            .requestContentListLike(data.content.id.toString());
-        final jsonRes = json.decode(result.data);
+        String id = data.content.id;
+        final response = await Fetch.init.get(ApiService.like + "$id");
+        final jsonRes = json.decode(response);
         if (jsonRes["message"].toString() == "success") {
           data.content.like_flag = true;
           data.content.like_number = jsonRes["data"];
@@ -140,9 +141,9 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.collection:
         // 调用收藏接口
-        final result = await ApiService()
-            .requestContentListCollection(data.content.id.toString());
-        final jsonRes = json.decode(result.data);
+        String id = data.content.id;
+        final response = await Fetch.init.get(ApiService.collection + "$id");
+        final jsonRes = json.decode(response);
         if (jsonRes["message"].toString() == "success") {
           data.content.collection_flag = true;
           data.content.collection_number = jsonRes["data"];
