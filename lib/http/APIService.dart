@@ -24,4 +24,7 @@ class ApiService {
 
   /// 提交频道排序结果
   static final String updateSort = "v1/channel/updateSort";
+
+  ///关注
+  static final String list4follow = "v1/content/list4follow";
 }

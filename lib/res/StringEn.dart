@@ -25,4 +25,5 @@
   String nickname = "NickName";
   String phoneNum = "Mobile";
   String password = "PassWord";
+  String avatar = "Avatar";
 }
