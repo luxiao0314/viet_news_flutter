@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
 import 'package:viet_news_flutter/page/WebViewPage.dart';
+import 'package:viet_news_flutter/page/find/news/UserInfoPage.dart';
 import 'package:viet_news_flutter/util/tools.dart';
 import 'package:viet_news_flutter/view/ContentListView.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
@@ -106,6 +107,11 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
     switch (type) {
       case OnClickContentListType.header:
         // 跳转到个人信息页面
+        Navigator.of(context).push(
+          new MaterialPageRoute(
+            builder: (context) => new UserInfoPage()
+          )
+        );
         break;
       case OnClickContentListType.content:
         // 跳转到内容页
