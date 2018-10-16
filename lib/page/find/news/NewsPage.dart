@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
 import 'package:viet_news_flutter/page/WebViewPage.dart';
+import 'package:viet_news_flutter/page/find/news/UserInfoPage.dart';
 import 'package:viet_news_flutter/util/tools.dart';
 import 'package:viet_news_flutter/view/ContentListView.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
@@ -11,12 +12,13 @@ import '../../../http/APIService.dart';
 
 class NewsPage extends StatefulWidget {
   NewsPage(this.channelId);
+
   final int channelId;
+
 //  final Map<String, List<ContentListResponseList>> datas = Map();
 
   @override
   State<StatefulWidget> createState() => _NewsPageStatus();
-
 }
 
 class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
@@ -33,7 +35,6 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     // final lists = newsShare.datas[widget.channelId.toString()];
     print("newsPage build ${datas.length}");
     return SmartRefresher(
@@ -42,19 +43,19 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         onRefresh: _onRefresh,
         onOffsetChange: _onOffsetCallback,
         controller: _refreshController,
-        child: datas[widget.channelId.toString()]==null||datas[widget.channelId.toString()].length == 0 ?
-        CustomScrollView() :
-        ListView.builder(
-          itemBuilder: (context, index) {
-            final data = datas[widget.channelId.toString()][index];
-            return new ContentListView(
-              data: data,
-              click: (type, data) => _onClickContentList(type, data),
-            );
-          },
-          itemCount: datas[widget.channelId.toString()].length,
-        )
-    );
+        child: datas[widget.channelId.toString()] == null ||
+                datas[widget.channelId.toString()].length == 0
+            ? CustomScrollView()
+            : ListView.builder(
+                itemBuilder: (context, index) {
+                  final data = datas[widget.channelId.toString()][index];
+                  return new ContentListView(
+                    data: data,
+                    click: (type, data) => _onClickContentList(type, data),
+                  );
+                },
+                itemCount: datas[widget.channelId.toString()].length,
+              ));
   }
 
   @override
@@ -64,7 +65,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   Future<void> _onRefresh(bool up) async {
-    if(up) {
+    if (up) {
       count = 1;
     } else {
       count++;
@@ -103,30 +104,33 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   // 点击头像名字 内容 金币 喜欢 收藏 事件
-  Future<Null> _onClickContentList(OnClickContentListType type, ContentListResponseList data) async{
+  Future<Null> _onClickContentList(
+      OnClickContentListType type, ContentListResponseList data) async {
     print(type);
     switch (type) {
       case OnClickContentListType.header:
-      // 跳转到个人信息页面
+        // 跳转到个人信息页面
+        Navigator.of(context).push(
+            new MaterialPageRoute(builder: (context) => new UserInfoPage()));
         break;
       case OnClickContentListType.content:
-      // 跳转到内容页
-        saveWebDetailPresference(data.content.content_detail, data.content.content_title).then((_) {
+        // 跳转到内容页
+        saveWebDetailPresference(
+                data.content.content_detail, data.content.content_title)
+            .then((_) {
           Navigator.of(context).push(
-              new MaterialPageRoute(
-                  builder: (context) => new WebViewPage()
-              )
-          );
+              new MaterialPageRoute(builder: (context) => new WebViewPage()));
         }, onError: (error) {
           print(error);
         });
         break;
       case OnClickContentListType.coin:
-      // 跳转到金币页
+        // 跳转到金币页
         break;
       case OnClickContentListType.like:
-      // 调用喜欢接口
-        final result = await ApiService().requestContentListLike(data.content.id.toString());
+        // 调用喜欢接口
+        final result = await ApiService()
+            .requestContentListLike(data.content.id.toString());
         final jsonRes = json.decode(result.data);
         if (jsonRes["message"].toString() == "success") {
           data.content.like_flag = true;
@@ -135,8 +139,9 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         }
         break;
       case OnClickContentListType.collection:
-      // 调用收藏接口
-        final result = await ApiService().requestContentListCollection(data.content.id.toString());
+        // 调用收藏接口
+        final result = await ApiService()
+            .requestContentListCollection(data.content.id.toString());
         final jsonRes = json.decode(result.data);
         if (jsonRes["message"].toString() == "success") {
           data.content.collection_flag = true;
@@ -146,7 +151,6 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
     }
   }
-
 
   void _onOffsetCallback(bool isUp, double offset) {
     // if you want change some widgets state ,you should rewrite the callback

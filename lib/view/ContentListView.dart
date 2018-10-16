@@ -81,6 +81,7 @@ class _ContentListViewState extends State<ContentListView> {
                 width: 22.0,
                 height: 22.0,
                 child: new CircleAvatar(
+                  backgroundColor: Colors.white,
                   backgroundImage: NetworkImage(widget.data.author.avatar),
                 ),
               ),
