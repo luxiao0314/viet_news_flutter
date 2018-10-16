@@ -68,22 +68,23 @@ class Fetch {
   }
 
   Future<dynamic> get(String path, {dynamic data}) async {
-    print('fetch: get=$path, data=$data');
-    return analyzing(await dio.get(path, data: data));
+    return dio.get(path, data: data).then(_checkStatus);
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    print('fetch: post=$path, data=$data');
-    return analyzing(await dio.post(path, data: data));
+    return dio.post(path, data: data).then(_checkStatus);
   }
 
-  Future<dynamic> analyzing(Response response) async {
-    print('response: ${response.data}');
-    if (response.statusCode == 200) {
-      return response.data;
+  Future<dynamic> _checkStatus(Response response) async {
+    print("response: = $response");
+    // 如果http状态码正常，则直接返回数据
+    if (response != null &&
+        (response.statusCode == 200 ||
+            response.statusCode == 304 ||
+            response.statusCode == 400)) {
+      return response.data; // 如果不需要除了data之外的数据，可以直接 return response.data
     } else {
-      throw response.data.message ?? '数据获取失败';
+      throw "数据异常";
     }
   }
-
 }

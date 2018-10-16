@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/bean/AllChannelListResponse.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
+import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
@@ -62,20 +63,14 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
   }
 
   void _getAllChannelList() {
-    Future<Response> future = ApiService().getAllChannelList();
-    future.then((resData) {
-      String json = resData.data.toString();
-      print(json);
-      channelAllListResponse = ChannelAllListResponse(json);
+    Fetch.init.post(ApiService.allList).then((resData) {
+      channelAllListResponse = ChannelAllListResponse(resData);
     });
   }
 
   void _getChannelList() {
-    Future<Response> future = ApiService().getChannelList();
-    future.then((resData) {
-      String json = resData.data.toString();
-      print(json);
-      ChannelResponse response = ChannelResponse(json);
+    Fetch.init.post(ApiService.channelList).then((resData) {
+      ChannelResponse response = ChannelResponse(resData);
       tabList = response.data;
       setState(() {
         _controller = TabController(length: tabList.length, vsync: this);
@@ -83,7 +78,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
           _currentTab = _controller.index;
         });
       });
-    });
+    }).catchError((error) => print("error: $error"));
   }
 
   Widget _initTabBar() {
@@ -181,8 +176,8 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
         return {"channel_id": bean.id.toString()};
       }).toList()
     };
-    final response = await ApiService().updateChannelSort(params);
-    print(response);
-    //TODO 对请求结果做处理，例如 保存成功 等..
+    Fetch.init.post(ApiService.channelList, data: params).then((resData) {
+      //TODO 对请求结果做处理，例如 保存成功 等..
+    });
   }
 }
