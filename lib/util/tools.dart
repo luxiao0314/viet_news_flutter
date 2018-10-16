@@ -26,16 +26,5 @@ void print2(String title, dynamic content) {
   print("-------------End $title-------------");
 }
 
-/// 首页数据保存 防止重载rebuild
-class NewsShare {
-
-  static final NewsShare _share = NewsShare._internal();
-
-  factory NewsShare() {
-    return _share;
-  }
-
-  NewsShare._internal();
-
-  Map<String, List<ContentListResponseList>> datas = Map();
-}
+const String methodChannelName = "com.mw.viet_flutter_news";
+const String getStatusBarHeight = "getStatusBarHeight";
