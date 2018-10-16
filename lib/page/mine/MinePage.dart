@@ -7,7 +7,6 @@ import 'package:viet_news_flutter/page/mine/SettingsPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
-import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/util/User.dart';
 import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/view/SettingsGroup.dart';
@@ -85,7 +84,6 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
         ],
       ),
     );
-
 
     return Scaffold(
         appBar: AppBar(
