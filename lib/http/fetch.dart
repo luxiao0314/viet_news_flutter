@@ -33,10 +33,11 @@ class Fetch {
       return options;
     };
     dio.interceptor.response.onSuccess = (Response response) {
+      print("response: $response");
       return response; // continue
     };
     dio.interceptor.response.onError = (DioError e) async {
-      print("interceptor-error: $e");
+      print("error: $e");
       return e;
     };
 
@@ -68,21 +69,14 @@ class Fetch {
   }
 
   Future<dynamic> get(String path, {dynamic data}) async {
-    return dio
-        .get(path, data: data)
-        .then(_checkStatus)
-        .catchError((error) => print("error: $error"));
+    return dio.get(path, data: data).then(_checkStatus);
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    return dio
-        .post(path, data: data)
-        .then(_checkStatus)
-        .catchError((error) => print("error: $error"));
+    return dio.post(path, data: data).then(_checkStatus);
   }
 
   Future<dynamic> _checkStatus(Response response) async {
-    print("response: = $response");
     // 如果http状态码正常，则直接返回数据
     if (response != null &&
         (response.statusCode == 200 ||
