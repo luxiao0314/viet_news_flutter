@@ -130,7 +130,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.like:
         // 调用喜欢接口
-        String id = data.content.id;
+        String id = data.content.id.toString();;
         final response = await Fetch.init.get(ApiService.like + "$id");
         final jsonRes = json.decode(response);
         if (jsonRes["message"].toString() == "success") {
@@ -141,7 +141,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.collection:
         // 调用收藏接口
-        String id = data.content.id;
+        String id = data.content.id.toString();
         final response = await Fetch.init.get(ApiService.collection + "$id");
         final jsonRes = json.decode(response);
         if (jsonRes["message"].toString() == "success") {
