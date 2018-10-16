@@ -48,7 +48,6 @@ class _SettingsPage extends State<SettingsPage> {
     );
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
-      backgroundColor: bg_white,
       appBar: AppBar(
         brightness: Brightness.light,
         leading: GestureDetector(
@@ -86,7 +85,12 @@ class _SettingsPage extends State<SettingsPage> {
               label: Local.of(context).nickname,
               hasDetails: true,
               onPress: () async {},
-            ),
+            )
+          ]),
+          Container(
+            padding: EdgeInsets.only(top: 10.0),
+          ),
+          SettingsGroup(<Widget>[
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).phoneNum,
