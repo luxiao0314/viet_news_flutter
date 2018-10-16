@@ -75,16 +75,16 @@ class SettingsGroup extends StatelessWidget {
       Container(
         decoration: BoxDecoration(
           color: CupertinoColors.white,
-          border: Border(
-            top: const BorderSide(
-              color: borderColor,
-              width: 0.0,
-            ),
-            bottom: const BorderSide(
-              color: borderColor,
-              width: 0.0,
-            ),
-          ),
+//          border: Border(
+//            top: const BorderSide(
+//              color: borderColor,
+//              width: 0.0,
+//            ),
+//            bottom: const BorderSide(
+//              color: borderColor,
+//              width: 0.0,
+//            ),
+//          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
