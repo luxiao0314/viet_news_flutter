@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
@@ -14,6 +17,16 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPage extends State<SettingsPage> {
+  File _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //用户头像
@@ -31,10 +44,15 @@ class _SettingsPage extends State<SettingsPage> {
                 top: top_bottom_middle, bottom: top_bottom_middle),
             child: Text(Local.of(context).avatar, style: text_style_16_black),
           )),
-          Container(
-            padding: EdgeInsets.only(right: 5.0),
-            child: Image.asset("images/ic_default_article.png",
-                width: icon_user, height: icon_user, fit: BoxFit.cover),
+          GestureDetector(
+            onTap: () {
+              getImage();
+            },
+            child: Container(
+              padding: EdgeInsets.only(right: 5.0),
+              child: Image.asset("images/ic_default_article.png",
+                  width: icon_user, height: icon_user, fit: BoxFit.cover),
+            ),
           ),
           Container(
               padding: EdgeInsets.only(left: 5.0, right: 8.5),
