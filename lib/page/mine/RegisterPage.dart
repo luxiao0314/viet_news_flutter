@@ -21,9 +21,7 @@ class _RegisterStatus extends State<RegisterPage> {
         child: NextRegisterWidget(),
       );
     }
-    return RegisterWidget(onNextClick: () {
-      setState(() => next = true);
-    });
+    return RegisterWidget(onNextClick: () => setState(() => next = true));
   }
 
   Future<bool> _requestPop() {

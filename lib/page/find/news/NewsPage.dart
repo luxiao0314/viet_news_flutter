@@ -1,19 +1,21 @@
 import 'dart:async';
-import 'package:dio/dio.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/view/ContentListView.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
 import '../../../http/APIService.dart';
 
 class NewsPage extends StatefulWidget {
   NewsPage(this.channelId);
+
   final int channelId;
   final Map<String, List<ContentListResponseList>> datas = Map();
   final _refreshController = RefreshController();
   int count = 0;
+
   @override
   State<StatefulWidget> createState() => _NewsPageStatus();
 }
@@ -23,26 +25,26 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     // final lists = widget.datas[widget.channelId.toString()];
     return SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: true,
-      onRefresh: _onRefresh,
-      onOffsetChange: _onOffsetCallback,
-      controller: widget._refreshController,
-      child: widget.datas[widget.channelId.toString()]==null||widget.datas[widget.channelId.toString()].length == 0 ?
-          CustomScrollView() :
-          ListView.builder(
-            itemBuilder: (context, index) {
-              final data = widget.datas[widget.channelId.toString()][index];
-              return new ContentListView(
-                data: data,
-                click: (type, data) => _onClickContentList(type, data),
-              );
-            },
-            itemCount: widget.datas[widget.channelId.toString()].length,
-      )
-    );
+        enablePullDown: true,
+        enablePullUp: true,
+        onRefresh: _onRefresh,
+        onOffsetChange: _onOffsetCallback,
+        controller: widget._refreshController,
+        child: widget.datas[widget.channelId.toString()] == null ||
+                widget.datas[widget.channelId.toString()].length == 0
+            ? CustomScrollView()
+            : ListView.builder(
+                itemBuilder: (context, index) {
+                  final data = widget.datas[widget.channelId.toString()][index];
+                  return new ContentListView(
+                    data: data,
+                    click: (type, data) => _onClickContentList(type, data),
+                  );
+                },
+                itemCount: widget.datas[widget.channelId.toString()].length,
+              ));
   }
-  
+
   @override
   void initState() {
     super.initState();
@@ -50,7 +52,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   Future<void> _onRefresh(bool up) async {
-    if(up) {
+    if (up) {
       widget.count = 1;
     } else {
       widget.count++;
@@ -63,14 +65,20 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   Future<void> _getContentList([bool up]) async {
-    final params = {"page_number": widget.count, "page_size": "10", "channel_id": 3};
+    final params = {
+      "page_number": widget.count,
+      "page_size": "10",
+      "channel_id": 3
+    };
+
     final response = await ApiService().getContentList(params);
     final result = ContentListResponse(response.data);
     setState(() {
       if (up != null) {
         if (up) {
           // 下拉刷新更多数据
-          widget.datas[widget.channelId.toString()].insertAll(0, result.data.list);
+          widget.datas[widget.channelId.toString()]
+              .insertAll(0, result.data.list);
           widget._refreshController.sendBack(up, RefreshStatus.completed);
         } else {
           // 上拉加载更多
@@ -88,7 +96,8 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
   }
 
   // 点击头像名字 内容 金币 喜欢 收藏 事件
-  Future<Null> _onClickContentList(OnClickContentListType type, ContentListResponseList data) async{
+  Future<Null> _onClickContentList(
+      OnClickContentListType type, ContentListResponseList data) async {
     print(type);
     switch (type) {
       case OnClickContentListType.header:
@@ -102,7 +111,8 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.like:
         // 调用喜欢接口
-        final result = await ApiService().requestContentListLike(data.content.id.toString());
+        final result = await ApiService()
+            .requestContentListLike(data.content.id.toString());
         final jsonRes = json.decode(result.data);
         if (jsonRes["message"].toString() == "success") {
           data.content.like_flag = true;
@@ -112,7 +122,8 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.collection:
         // 调用收藏接口
-        final result = await ApiService().requestContentListCollection(data.content.id.toString());
+        final result = await ApiService()
+            .requestContentListCollection(data.content.id.toString());
         final jsonRes = json.decode(result.data);
         if (jsonRes["message"].toString() == "success") {
           data.content.collection_flag = true;
@@ -122,7 +133,6 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
     }
   }
-
 
   void _onOffsetCallback(bool isUp, double offset) {
     // if you want change some widgets state ,you should rewrite the callback

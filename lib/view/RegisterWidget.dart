@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
-import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/model/viewmodel/RegisterViewModel.dart';
 
 typedef void OnNextClickListener();
 
@@ -17,7 +17,16 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-  final TextEditingController _controller = new TextEditingController();
+  final TextEditingController _controllerNum = new TextEditingController();
+  final TextEditingController _controllerCode = new TextEditingController();
+  final TextEditingController _controllerInvite = new TextEditingController();
+  RegisterViewModel model;
+
+  @override
+  void initState() {
+    super.initState();
+    model = RegisterViewModel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   padding: EdgeInsets.only(right: 10.0), child: Text("+86")),
               Expanded(
                   child: TextField(
-                controller: _controller,
+                keyboardType: TextInputType.phone,
+                controller: _controllerNum,
                 decoration:
                     InputDecoration(hintText: '手机号', border: InputBorder.none),
               ))
@@ -45,7 +55,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               Expanded(
                   flex: 2,
                   child: TextField(
-                    controller: _controller,
+                    keyboardType: TextInputType.phone,
+                    controller: _controllerCode,
                     decoration: InputDecoration(
                         hintText: '验证码', border: InputBorder.none),
                   )),
@@ -65,7 +76,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           ),
           Divider(),
           TextField(
-            controller: _controller,
+            keyboardType: TextInputType.text,
+            controller: _controllerInvite,
             decoration: InputDecoration(
                 hintText: '输入邀请码(非必填)', border: InputBorder.none),
           ),
@@ -78,7 +90,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-              onPressed: () => widget.onNextClick(),
+              onPressed: () => _register(),
               minSize: 13.0,
               child: Text(
                 "下一步",
@@ -89,5 +101,18 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         ],
       ),
     );
+  }
+
+  _register() {
+    model.getContentList();
+    if (_controllerNum.text.isEmpty) {
+      toast("请输入手机号码");
+      return;
+    }
+    if (_controllerCode.text.isEmpty) {
+      toast("请输入验证码");
+      return;
+    }
+    widget.onNextClick();
   }
 }
