@@ -5,12 +5,10 @@ import 'CommonItem.dart';
 
 class SettingsGroup extends StatelessWidget {
   const SettingsGroup(
-      this.items,
-      {
-        this.header,
-        this.footer,
-      }
-      ) : assert(items != null);
+    this.items, {
+    this.header,
+    this.footer,
+  }) : assert(items != null);
 
   final List<Widget> items;
 
@@ -26,9 +24,7 @@ class SettingsGroup extends StatelessWidget {
           return item;
         } else {
           final leftPadding = item is CommonItem
-              ? item.iconAssetLabel == null
-              ? 15.0
-              : 58.0
+              ? item.iconAssetLabel == null ? 15.0 : 58.0
               : 0.0;
           // Add inner dividers.
           return Stack(
@@ -52,23 +48,20 @@ class SettingsGroup extends StatelessWidget {
     final List<Widget> columnChildren = [];
 
     if (header != null) {
-      columnChildren.add(
-          DefaultTextStyle(
-            style: TextStyle(
-              color: CupertinoColors.inactiveGray,
-              fontSize: 13.5,
-              letterSpacing: -0.5,
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-                bottom: 6.0,
-              ),
-              child: header,
-            ),
-          )
-      );
+      columnChildren.add(DefaultTextStyle(
+        style: TextStyle(
+          color: CupertinoColors.inactiveGray,
+          fontSize: 13.5,
+          letterSpacing: -0.5,
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+          ),
+          child: header,
+        ),
+      ));
     }
 
     columnChildren.add(
@@ -94,33 +87,26 @@ class SettingsGroup extends StatelessWidget {
     );
 
     if (footer != null) {
-      columnChildren.add(
-          DefaultTextStyle(
-            style: TextStyle(
-              color: groupSubtitle,
-              fontSize: 13.0,
-              letterSpacing: -0.08,
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-                top: 7.5,
-              ),
-              child: footer,
-            ),
-          )
-      );
+      columnChildren.add(DefaultTextStyle(
+        style: TextStyle(
+          color: groupSubtitle,
+          fontSize: 13.0,
+          letterSpacing: -0.08,
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 7.5,
+          ),
+          child: footer,
+        ),
+      ));
     }
 
-    return Padding(
-      padding: EdgeInsets.only(
-        top: 10.0,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: columnChildren,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: columnChildren,
     );
   }
 }

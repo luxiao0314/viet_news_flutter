@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
@@ -28,10 +29,11 @@ class _SettingsPage extends State<SettingsPage> {
         ],
       ),
     );
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       backgroundColor: bg_white,
       appBar: AppBar(
+        brightness: Brightness.light,
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
@@ -50,8 +52,12 @@ class _SettingsPage extends State<SettingsPage> {
       ),
       body: Column(
         children: <Widget>[
+          userIcon,
+          Padding(
+            padding: EdgeInsets.only(left: 15.0),
+            child: Divider(height: 0.3, color: CupertinoColors.inactiveGray),
+          ),
           SettingsGroup(<Widget>[
-            userIcon,
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).magic_num,
