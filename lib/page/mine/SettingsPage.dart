@@ -16,16 +16,33 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPage extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    //用户头像
     Widget userIcon = new Container(
-      padding: const EdgeInsets.all(left_right_margin),
+      padding: const EdgeInsets.only(
+          left: left_right_margin,
+          top: left_right_margin,
+          bottom: left_right_margin),
       color: bg_white,
       child: new Row(
         children: <Widget>[
-          Container(
+          Expanded(
+              child: Container(
             padding: EdgeInsets.only(
                 top: top_bottom_middle, bottom: top_bottom_middle),
-            child: Text("头像"),
+            child: Text(Local.of(context).avatar, style: text_style_16_black),
+          )),
+          Container(
+            padding: EdgeInsets.only(right: 5.0),
+            child: Image.asset("images/ic_default_article.png",
+                width: icon_user, height: icon_user, fit: BoxFit.cover),
           ),
+          Container(
+              padding: EdgeInsets.only(left: 5.0, right: 8.5),
+              child: Icon(
+                CupertinoIcons.forward,
+                color: mediumGrayColor,
+                size: 21.0,
+              )),
         ],
       ),
     );

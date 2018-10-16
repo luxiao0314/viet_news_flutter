@@ -47,4 +47,6 @@ class StringZh extends StringEn {
   String phoneNum = "手机";
   @override
   String password = "登录密码";
+  @override
+  String avatar = "头像";
 }
