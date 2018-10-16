@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/bean/AllChannelListResponse.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
@@ -58,14 +56,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
   List<Widget> _getTabViewPages() {
     return tabList.map((channelBean) {
       return GestureDetector(
-        child: Center(
-          child: NewsPage(channelBean.id),
-        ),
-//         onTap: () {
-//           Fluttertoast.showToast(
-//               msg: channelBean.channel_name, gravity: ToastGravity.CENTER);
-// //          _getAllChannelList();
-//         },
+        child: Center(child: NewsPage(channelBean.id)),
       );
     }).toList();
   }
@@ -143,17 +134,55 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
     }
   }
 
-  void _onAddTap() {
+  void _onAddTap() async {
     if (channelAllListResponse != null &&
         channelAllListResponse.data != null &&
         channelAllListResponse.data.unFollowChannelList != null &&
         channelAllListResponse.data.followChannelList != null) {
-      Navigator.of(context, rootNavigator: true)
-          .push(CupertinoPageRoute(builder: (context) {
+      final result = await Navigator.of(context, rootNavigator: true)
+          .push(MaterialPageRoute<List<ChannelBean>>(builder: (context) {
         return ChannelPage(
             followList: channelAllListResponse.data.followChannelList,
             unFollowList: channelAllListResponse.data.unFollowChannelList);
       }));
+      //频道没有变化 ，UI也不需要变化
+      if (result.length == tabList.length) {
+        var flag = true;
+        for (var i = 0; i < result.length; ++i) {
+          var originBean = tabList[i];
+          var newBean = result[i];
+          if (originBean.id != newBean.id) {
+            flag = false;
+            break;
+          }
+        }
+        if (flag) {
+          return;
+        }
+      }
+      tabList.clear();
+      setState(() {
+        tabList.addAll(result);
+        setState(() {
+          _controller = TabController(length: tabList.length, vsync: this);
+          _controller.addListener(() {
+            _currentTab = _controller.index;
+          });
+        });
+        //  请求接口保存频道顺序。 "v1/channel/updateSort"
+        _updateSort();
+      });
     }
+  }
+
+  void _updateSort() async {
+    final params = {
+      "channel_list": tabList.map((ChannelBean bean) {
+        return {"channel_id": bean.id.toString()};
+      }).toList()
+    };
+    final response = await ApiService().updateChannelSort(params);
+    print(response);
+    //TODO 对请求结果做处理，例如 保存成功 等..
   }
 }

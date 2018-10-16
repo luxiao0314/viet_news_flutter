@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' show CupertinoButton;
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/bean/ChannelBean.dart';
+import 'package:viet_news_flutter/view/CloseButton.dart';
 import 'package:viet_news_flutter/view/SortableGridView.dart';
 
 class ChannelPage extends StatefulWidget {
@@ -26,7 +27,9 @@ class _ChannelPageStatus extends State<ChannelPage> {
             padding: EdgeInsets.only(top: 50.0, right: 20.0),
             child: Container(
               alignment: Alignment.centerRight,
-              child: CloseButton(),
+              child: MyCloseButton(
+                result: widget.followList,
+              ),
             ),
           ),
         ),
@@ -70,8 +73,18 @@ class _ChannelPageStatus extends State<ChannelPage> {
                     _needShowClose = !_needShowClose;
                   });
                 },
-                child: Text(_needShowClose ? "完成" : '删除/排序',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black)),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 1.0),
+                      borderRadius: BorderRadius.circular(30.0)),
+                  child: Center(
+                    child: Text(_needShowClose ? "完成" : '删除/排序',
+                        style: TextStyle(fontSize: 13.0, color: Colors.black)),
+                  ),
+                  width: 80.0,
+                ),
               ),
             ))
           ],
@@ -113,9 +126,12 @@ class _ChannelPageStatus extends State<ChannelPage> {
         childAspectRatio: 2.5,
         crossAxisCount: 3,
         scrollDirection: Axis.vertical,
+        canDrag: (index) => widget.followList[index].can_delete,
         canAccept: (oldIndex, newIndex) {
           print('newIndex: $newIndex canAccept oldIndex: $oldIndex');
-          return newIndex != 0 && oldIndex != 0;
+
+          return widget.followList[oldIndex].can_delete &&
+              widget.followList[newIndex].can_delete;
         },
         onDragStarted: () {
           if (!_needShowClose) {
@@ -126,7 +142,7 @@ class _ChannelPageStatus extends State<ChannelPage> {
         itemBuilder: (context, data) {
           return GestureDetector(
               onTap: () {
-                if (_needShowClose && widget.followList.indexOf(data) != 0) {
+                if (_needShowClose && data.can_delete) {
                   widget.followList.remove(data);
                   widget.unFollowList.add(data);
                   setState(() {});
@@ -152,10 +168,18 @@ class _ChannelPageStatus extends State<ChannelPage> {
                   ),
                   Align(
                     alignment: Alignment.topRight,
-                    child:
-                        _needShowClose && widget.followList.indexOf(data) != 0
-                            ? Icon(Icons.close)
-                            : null,
+                    child: _needShowClose && data.can_delete
+                        ? Container(
+                            height: 15.0,
+                            width: 15.0,
+                            child: ImageIcon(
+                              AssetImage(
+                                "images/ic_delete_channel.png",
+                              ),
+                              color: Color(0xffcccccc),
+                            ),
+                          )
+                        : null,
                   )
                 ],
               ));

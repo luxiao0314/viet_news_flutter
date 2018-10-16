@@ -44,6 +44,7 @@ class CommonItemState extends State<CommonItem> {
   @override
   Widget build(BuildContext context) {
     List<Widget> rowChildren = [];
+    //暂时未用到
     if (widget.iconAssetLabel != null) {
       rowChildren.add(
         Padding(

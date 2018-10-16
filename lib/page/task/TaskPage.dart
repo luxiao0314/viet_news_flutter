@@ -1,11 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
-import 'package:viet_news_flutter/model/response/TaskResponse.dart';
 import 'package:viet_news_flutter/local/Local.dart';
+import 'package:viet_news_flutter/manager/ToastManager.dart';
+import 'package:viet_news_flutter/model/response/TaskResponse.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/style.dart';
 
@@ -42,7 +43,6 @@ class _TaskPageState extends State<TaskPage> {
               itemBuilder: _buildListItem,
               addRepaintBoundaries: false),
         ));
-
   }
 
 //创建列表item
@@ -110,8 +110,7 @@ class _TaskPageState extends State<TaskPage> {
                       borderRadius:
                           const BorderRadius.all(Radius.circular(60.0)),
                       onPressed: () {
-                        Fluttertoast.showToast(
-                            msg: "查看", gravity: ToastGravity.CENTER);
+                        toast(context, "查看");
                       },
                       minSize: 14.0,
                       child: Text(
@@ -175,8 +174,7 @@ class _TaskPageState extends State<TaskPage> {
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
               onPressed: () {
-                Fluttertoast.showToast(
-                    msg: "去邀请", gravity: ToastGravity.CENTER);
+                toast(context, "去邀请");
               },
               minSize: 13.0,
               child: Text(

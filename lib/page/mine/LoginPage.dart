@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
 import 'package:viet_news_flutter/page/mine/LoginSubPage.dart';
-import 'package:viet_news_flutter/page/mine/PwdLoginPage.dart';
 import 'package:viet_news_flutter/page/mine/RegisterPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 
@@ -47,7 +45,7 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 color: btn_blue,
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast("Facebook登录"),
+                onPressed: () => toast(context, "Facebook登录"),
                 minSize: 13.0,
                 child: Text(
                   "Facebook登录",
@@ -55,7 +53,7 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
                 ),
               )),
           Container(
-              margin: EdgeInsets.only(bottom: 20.0,top: 20.0),
+              margin: EdgeInsets.only(bottom: 20.0, top: 20.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

@@ -1,6 +1,6 @@
 import 'package:viet_news_flutter/res/StringEn.dart';
 
-/**
+/*
  * @Author Aaron
  * @Email aaron@merculet.io
  * @Date 2018/10/14
@@ -37,4 +37,14 @@ class StringZh extends StringEn {
   String favorite = "收藏";
   @override
   String settings = "设置";
+  @override
+  String personal_info = "个人信息";
+  @override
+  String magic_num = "MagicBox号";
+  @override
+  String nickname = "昵称";
+  @override
+  String phoneNum = "手机";
+  @override
+  String password = "登录密码";
 }

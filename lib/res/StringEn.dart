@@ -1,4 +1,4 @@
-/**
+/*
  * @Author Aaron
  * @Email aaron@merculet.io
  * @Date 2018/10/14
@@ -20,4 +20,9 @@
   String enjoy_gift = "Enjoy the gift";
   String favorite = "Favorite";
   String settings = "Settings";
+  String personal_info = "PersonalInfo";
+  String magic_num = "MagicBox No.";
+  String nickname = "NickName";
+  String phoneNum = "Mobile";
+  String password = "PassWord";
 }
