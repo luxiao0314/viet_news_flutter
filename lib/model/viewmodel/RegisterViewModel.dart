@@ -18,8 +18,8 @@ class RegisterViewModel {
           "validation_code_type": VerifyCodeTypeEnum.REGISTER.toString(),
           "zone_code": "86",
           "phone_number": text
-        })
-        .then((response) => print("success: $response"));
+        });
+//        .then((response) => print("success: $response"));
   }
 
   Future<dynamic> register(String number, String code,String inviteCode) {

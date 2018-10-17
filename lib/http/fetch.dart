@@ -33,23 +33,10 @@ class Fetch {
   }
 
   Future<dynamic> get(String path, {dynamic data}) async {
-    return dio.get(path, data: data).then(_checkStatus);
+    return dio.get(path, data: data);
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    return dio.post(path, data: data)
-        .then(_checkStatus);
-  }
-
-  Future<dynamic> _checkStatus(Response response) async {
-      // 如果http状态码正常，则直接返回数据
-      if (response.statusCode == HttpStatus.ok) {
-        if (json.decode(response.data)["code"] == 0) {
-          return response.data;
-        }
-        throw DioError(response: response, message: json.decode(response.data)["message"],type: DioErrorType.RESPONSE);
-      } else {
-        throw DioError(response: response, message: "网络异常",type: DioErrorType.RESPONSE);
-      }
+    return dio.post(path, data: data);
   }
 }
