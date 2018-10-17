@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:viet_news_flutter/Main.dart';
+import 'package:viet_news_flutter/manager/ToastManager.dart';
 
 class HttpInterceptor {
   Dio dio;
@@ -20,6 +22,7 @@ class HttpInterceptor {
     };
     dio.interceptor.response.onError = (DioError e) async {
       print("error: $e");
+      toasts(e.message);
       return e;
     };
   }

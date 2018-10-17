@@ -76,7 +76,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 color: Colors.red[500],
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast(context, "获取验证码"),
+                onPressed: () => _getCode(),
                 minSize: 13.0,
                 child: Text(
                   "获取验证码",
@@ -120,7 +120,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   }
 
   _register() {
-    model.getContentList();
     if (_controllerNum.text.isEmpty) {
       toast(context, "请输入手机号码");
       return;
@@ -129,6 +128,16 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       toast(context, "请输入验证码");
       return;
     }
-    widget.onNextClick();
+    model.register(
+            _controllerNum.text, _controllerCode.text, _controllerInvite.text)
+        .then((res) => widget.onNextClick());
+  }
+
+  _getCode() {
+    if (_controllerNum.text.isEmpty) {
+      toast(context, "请输入手机号码");
+      return;
+    }
+    model.sendSms(_controllerNum.text);
   }
 }

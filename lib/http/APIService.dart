@@ -8,6 +8,9 @@ class ApiService {
   ///发送短信
   static final String sendSMS = "v1/login/sendSms";
 
+  ///登录
+  static final String login = "v1/login/login";
+
   ///注册
   static final String register = "v1/login/register";
 
@@ -32,8 +35,7 @@ class ApiService {
   ///关注
   static final String list4follow = "v1/content/list4follow";
 
-  //收藏列表
+  ///收藏列表
   static final String list4collection = "v1/content/collectionList";
-
 
 }
