@@ -26,5 +26,5 @@ void print2(String title, dynamic content) {
   print("-------------End $title-------------");
 }
 
-const String methodChannelName = "com.mw.viet_flutter_news";
+const String methodChannelName = "com.mw.viet_flutter_news/channel";
 const String channel_getStatusBarHeight = "getStatusBarHeight";

@@ -31,4 +31,9 @@ class ApiService {
 
   ///关注
   static final String list4follow = "v1/content/list4follow";
+
+  //收藏列表
+  static final String list4collection = "v1/content/collectionList";
+
+
 }
