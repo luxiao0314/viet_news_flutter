@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:viet_news_flutter/local/Local.dart';
+import 'package:viet_news_flutter/page/mine/FavoritePage.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
 import 'package:viet_news_flutter/page/mine/SettingsPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
@@ -141,14 +142,14 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
                   label: Local.of(context).favorite,
                   hasDetails: true,
                   onPress: () async {
-                    await User.currentUser.isLogin().then((isLogin) {
-                      if (isLogin) {
-                        router(LoginPage());
-                      } else {
+//                    await User.currentUser.isLogin().then((isLogin) {
+//                      if (isLogin) {
+//                        router(LoginPage());
+//                      } else {
                         print('aaron login');
-                        router(LoginPage());
-                      }
-                    });
+                        router(FavoritePage());
+//                      }
+//                    });
                   },
                 ),
                 CommonItem(
@@ -156,14 +157,14 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
                   label: Local.of(context).settings,
                   hasDetails: true,
                   onPress: () async {
-                    await User.currentUser.isLogin().then((isLogin) {
-                      if (false) {
-                        router(LoginPage());
-                      } else {
+//                    await User.currentUser.isLogin().then((isLogin) {
+//                      if (false) {
+//                        router(LoginPage());
+//                      } else {
                         print('aaron login');
                         router(SettingsPage());
-                      }
-                    });
+//                      }
+//                    });
                   },
                 ),
               ]),
