@@ -144,19 +144,35 @@ class ContentListResponseContent {
 }
 
 class ContentListResponseAuthor {
-  Object fans_count;
-  Object follow_count;
-  Object follow_flag;
-  Object is_bind;
-  Object is_set_password;
-  Object login_type;
-  Object self_flag;
-  Object zone_code;
+  int fans_count;
+  int follow_count;
+  bool follow_flag;
+  bool is_bind;
+  bool is_set_password;
+  int login_type;
+  bool self_flag;
+  int zone_code;
   int id;
   String avatar;
   String invite_code;
   String nick_name;
   String phone_number;
+
+//  ContentListResponseAuthor() {
+//    this.fans_count = 0;
+//    this.follow_count = 0;
+//    this.follow_flag = false;
+//    this.is_bind = false;
+//    this.is_set_password = false;
+//    this.login_type = 0;
+//    this.self_flag = false;
+//    this.zone_code = 86;
+//    this.id = 1;
+//    this.avatar = "";
+//    this.invite_code = "";
+//    this.nick_name = "";
+//    this.phone_number = "";
+//  }
 
   ContentListResponseAuthor.fromParams(
       {this.fans_count,

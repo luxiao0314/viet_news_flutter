@@ -109,7 +109,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
       case OnClickContentListType.header:
         // 跳转到个人信息页面
         Navigator.of(context, rootNavigator: true).push(
-            new MaterialPageRoute(builder: (context) => new UserInfoPage()));
+            new MaterialPageRoute(builder: (context) => new UserInfoPage(author: data.author)));
         break;
       case OnClickContentListType.content:
         // 跳转到内容页
@@ -122,7 +122,7 @@ class _NewsPageStatus extends State<NewsPage> with TickerProviderStateMixin {
         break;
       case OnClickContentListType.like:
         // 调用喜欢接口
-        String id = data.content.id.toString();;
+        String id = data.content.id.toString();
         final response = await Fetch.init.get(ApiService.like + "$id");
         final jsonRes = json.decode(response);
         if (jsonRes["message"].toString() == "success") {

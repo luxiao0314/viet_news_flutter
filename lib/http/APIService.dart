@@ -31,4 +31,10 @@ class ApiService {
 
   ///关注
   static final String list4follow = "v1/content/list4follow";
+
+  /// 获取非个人的个人信息
+  static final String userInfo = "user/info/";
+
+  /// 获取非个人发布的文章列表
+  static final String contentListForUser = "content/list4user";
 }
