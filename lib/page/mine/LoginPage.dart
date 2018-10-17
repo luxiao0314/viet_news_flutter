@@ -32,36 +32,61 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
   }
 
   Widget _body() {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-              child: TabBarView(children: [RegisterPage(), LoginSubPage()])),
-          Container(
-              height: 50.00,
-              width: 250.00,
-              child: CupertinoButton(
-                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-                color: btn_blue,
-                borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast(context, "Facebook登录"),
-                minSize: 13.0,
-                child: Text(
-                  "Facebook登录",
-                  style: TextStyle(color: Colors.white, fontSize: 15.0),
-                ),
-              )),
-          Container(
-              margin: EdgeInsets.only(bottom: 20.0, top: 20.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("注册/登录即代表您同意"),
-                    Text("《MagicBox协议》", style: TextStyle(color: Colors.blue))
-                  ]))
-        ],
-      ),
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        return ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            //中间可滑动的部分
+            Container(
+              height: 400.0,
+              child: TabBarView(
+                children: [
+                  RegisterPage(),
+                  LoginSubPage(),
+                ],
+              ),
+            ),
+            //底部facebook
+            Container(
+              color: Colors.white,
+              height: 200.0,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 50.00,
+                    width: 250.00,
+                    child: CupertinoButton(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                      color: btn_blue,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(60.0)),
+                      onPressed: () => toast(context, "Facebook登录"),
+                      minSize: 13.0,
+                      child: Text(
+                        "Facebook登录",
+                        style: TextStyle(color: Colors.white, fontSize: 15.0),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20.0, top: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("注册/登录即代表您同意"),
+                        Text("《MagicBox协议》",
+                            style: TextStyle(color: Colors.blue))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

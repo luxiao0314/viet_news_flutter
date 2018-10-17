@@ -30,8 +30,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Container(
+    return Container(
       color: Colors.white,
       padding: EdgeInsets.all(20.0),
 //      margin: EdgeInsetsDirectional.only(top: 20.0),
@@ -116,7 +115,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           )
         ],
       ),
-    ));
+    );
   }
 
   _register() {
