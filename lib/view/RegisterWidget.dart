@@ -30,10 +30,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
+        child: Container(
       color: Colors.white,
       padding: EdgeInsets.all(20.0),
-      margin: EdgeInsetsDirectional.only(top: 20.0),
+//      margin: EdgeInsetsDirectional.only(top: 20.0),
       child: Column(
         children: <Widget>[
           Row(
@@ -42,6 +43,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   padding: EdgeInsets.only(right: 10.0), child: Text("+86")),
               Expanded(
                   child: TextField(
+                autocorrect: true,
+                //是否自动更正
+                autofocus: true,
+                //是否自动对焦
+                maxLines: 1,
                 keyboardType: TextInputType.phone,
                 controller: _controllerNum,
                 decoration:
@@ -55,6 +61,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               Expanded(
                   flex: 2,
                   child: TextField(
+                    autocorrect: true,
+                    //是否自动更正
+                    autofocus: true,
+                    //是否自动对焦
+                    maxLines: 1,
                     keyboardType: TextInputType.phone,
                     controller: _controllerCode,
                     decoration: InputDecoration(
@@ -76,6 +87,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           ),
           Divider(),
           TextField(
+            autocorrect: true,
+            //是否自动更正
+            autofocus: true,
+            //是否自动对焦
+            maxLines: 1,
             keyboardType: TextInputType.text,
             controller: _controllerInvite,
             decoration: InputDecoration(
@@ -100,17 +116,17 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           )
         ],
       ),
-    );
+    ));
   }
 
   _register() {
     model.getContentList();
     if (_controllerNum.text.isEmpty) {
-      toast(context,"请输入手机号码");
+      toast(context, "请输入手机号码");
       return;
     }
     if (_controllerCode.text.isEmpty) {
-      toast(context,"请输入验证码");
+      toast(context, "请输入验证码");
       return;
     }
     widget.onNextClick();

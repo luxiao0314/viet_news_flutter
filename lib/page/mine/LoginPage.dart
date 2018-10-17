@@ -71,29 +71,26 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
         child: Container(
           height: 99.0,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Align(
                 alignment: Alignment.bottomRight,
                 child: CloseButton(),
               ),
               Expanded(
-                  child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: TabBar(
-                  indicator: BoxDecoration(),
-                  isScrollable: true,
-//                  indicatorColor: Colors.transparent,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  unselectedLabelStyle:
-                      TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal),
-                  labelStyle:
-                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                  tabs: [
-                    Tab(text: "注册账号"),
-                    Tab(text: "登录"),
-                  ],
-                ),
+                  child: TabBar(
+                indicator: BoxDecoration(),
+                isScrollable: true,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                unselectedLabelStyle:
+                    TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal),
+                labelStyle:
+                    TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                tabs: [
+                  Tab(text: "注册账号"),
+                  Tab(text: "登录"),
+                ],
               )),
             ],
           ),

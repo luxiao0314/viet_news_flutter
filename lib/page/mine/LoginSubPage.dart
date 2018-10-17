@@ -18,7 +18,7 @@ class _LoginSubPageStatus extends State<LoginSubPage>
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        padding: EdgeInsets.only(top: 40.0),
+        padding: EdgeInsets.only(top: 20.0),
         child: new DefaultTabController(
             length: 2,
             child: Scaffold(

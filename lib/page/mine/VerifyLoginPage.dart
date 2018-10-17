@@ -22,6 +22,11 @@ class _VerifyStatus extends State<VerifyLoginPage> {
                   padding: EdgeInsets.only(right: 10.0), child: Text("+86")),
               Expanded(
                   child: TextField(
+                autocorrect: true,
+                //是否自动更正
+                autofocus: true,
+                //是否自动对焦
+                maxLines: 1,
                 controller: _controller,
                 decoration:
                     InputDecoration(hintText: '手机号', border: InputBorder.none),
@@ -34,6 +39,11 @@ class _VerifyStatus extends State<VerifyLoginPage> {
               Expanded(
                   flex: 2,
                   child: TextField(
+                    autocorrect: true,
+                    //是否自动更正
+                    autofocus: true,
+                    //是否自动对焦
+                    maxLines: 1,
                     controller: _controller,
                     decoration: InputDecoration(
                         hintText: '验证码', border: InputBorder.none),
