@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/bean/FavoriteListResponse.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
-typedef void OnClickFavoriteListView(OnClickFavoriteListType type, FavoriteData data);
+typedef void OnClickFavoriteListView(
+    OnClickFavoriteListType type, FavoriteData data);
 enum OnClickFavoriteListType {
   header,
   content,
@@ -18,9 +20,21 @@ class FavoriteListView extends StatefulWidget {
 class _FavoriteListViewState extends State<FavoriteListView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.0),
-      child: _render(),
+    return Slidable(
+      delegate: new SlidableDrawerDelegate(),
+      actionExtentRatio: 0.25,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        child: _render(),
+      ),
+      secondaryActions: <Widget>[
+        new IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => {},
+        ),
+      ],
     );
   }
 
@@ -28,13 +42,9 @@ class _FavoriteListViewState extends State<FavoriteListView> {
     if (widget.data.content.content_type == 2 ||
         widget.data.content.content_type == 1) {
       // 图片+文字
-      return Column(
-        children: <Widget>[_renderImageAndText(), new Divider()],
-      );
+      return _renderImageAndText();
     } else if (widget.data.content.content_type == 3) {
-      return Column(
-        children: <Widget>[_renderPureText(), new Divider()],
-      );
+      return _renderPureText();
     } else {
       return Text('没有该类型');
     }
@@ -43,7 +53,7 @@ class _FavoriteListViewState extends State<FavoriteListView> {
   /// 2. 纯文字
   Widget _renderPureText() {
     return Container(
-      padding: EdgeInsets.only(bottom: 12.0),
+      padding: EdgeInsets.only(bottom: 12.0, top: 12.0),
       child: new GestureDetector(
         onTap: () => widget.click(OnClickFavoriteListType.content, widget.data),
         child: new Text("深刻的飞机上来看大家反馈塑料袋金风科技拉克丝反馈说了的解放路口上岛咖啡建设路口"),
@@ -54,7 +64,7 @@ class _FavoriteListViewState extends State<FavoriteListView> {
   /// 4. 文字加图片
   Widget _renderImageAndText() {
     return Container(
-      padding: EdgeInsets.only(bottom: 12.0),
+      padding: EdgeInsets.only(bottom: 12.0, top: 12.0),
       child: new GestureDetector(
         onTap: () => widget.click(OnClickFavoriteListType.content, widget.data),
         child: Row(
