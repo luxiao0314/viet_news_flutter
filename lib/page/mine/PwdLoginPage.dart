@@ -22,6 +22,11 @@ class _PwdLoginStatus extends State<PwdLoginPage> {
                   padding: EdgeInsets.only(right: 10.0), child: Text("+86")),
               Expanded(
                   child: new TextField(
+                autocorrect: true,
+                //是否自动更正
+                autofocus: true,
+                //是否自动对焦
+                maxLines: 1,
                 controller: _controller,
                 decoration: new InputDecoration(
                     hintText: '手机号', border: InputBorder.none),
@@ -34,6 +39,13 @@ class _PwdLoginStatus extends State<PwdLoginPage> {
               Expanded(
                   flex: 2,
                   child: TextField(
+                    autocorrect: true,
+                    //是否自动更正
+                    autofocus: true,
+                    //是否自动对焦
+                    obscureText: true,
+                    //是否是密码
+                    maxLines: 1,
                     controller: _controller,
                     decoration: new InputDecoration(
                         hintText: '输入密码', border: InputBorder.none),

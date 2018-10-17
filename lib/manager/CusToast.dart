@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 /// @time 2018/10/15 下午2:33
 /// @email shuqing.li@merculet.io
 ///
-class Toast {
+class CusToast {
   static OverlayEntry _overlayEntry; //toast靠它加到屏幕上
   static bool _showing = false; //toast是否正在showing
   static DateTime _startedTime; //开启一个新toast的当前时间，用于对比是否已经展示了足够时间

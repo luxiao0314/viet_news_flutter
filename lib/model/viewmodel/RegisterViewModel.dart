@@ -1,27 +1,34 @@
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/fetch.dart';
+import 'package:viet_news_flutter/model/VerifyCodeTypeEnum.dart';
 
 class RegisterViewModel {
-  register() {
-    final params = {
-      "page_number": 17602129432,
-      "verify_code": 0314,
-    };
-    Fetch.init
-        .post(ApiService.register, data: params)
-        .then((response) => print("success: $response"))
-        .catchError((error) => print("error: $error"));
-  }
 
-  getContentList(){
-    final params = {
-      "page_number": 1,
-      "page_size": "10",
-      "channel_id": 3
-    };
+  getContentList() {
+    final params = {"page_number": 1, "page_size": "10", "channel_id": 3};
     Fetch.init
         .post(ApiService.list4Channel, data: params)
         .then((response) => print("success: $response"))
         .catchError((error) => print("error: $error"));
+  }
+
+  sendSms(String text) {
+    Fetch.init
+        .post(ApiService.sendSMS, data: {
+          "validation_code_type": VerifyCodeTypeEnum.REGISTER.toString(),
+          "zone_code": "86",
+          "phone_number": text
+        });
+//        .then((response) => print("success: $response"));
+  }
+
+  Future<dynamic> register(String number, String code,String inviteCode) {
+    return Fetch.init
+        .post(ApiService.register, data: {
+          "zone_code": "86",
+          "verify_code": code,
+          "invite_code": inviteCode,
+          "phone_number": number
+        });
   }
 }
