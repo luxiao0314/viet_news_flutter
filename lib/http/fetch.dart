@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/BaseResponse.dart';
 import 'package:viet_news_flutter/http/HttpInterceptor.dart';
+import 'package:viet_news_flutter/manager/ToastManager.dart';
 
 class Fetch {
   Dio dio;
@@ -39,14 +41,14 @@ class Fetch {
   }
 
   Future<dynamic> _checkStatus(Response response) async {
-    // 如果http状态码正常，则直接返回数据
-    if (response != null &&
-        (response.statusCode == 200 ||
-            response.statusCode == 304 ||
-            response.statusCode == 400)) {
-      return response.data; // 如果不需要除了data之外的数据，可以直接 return response.data
-    } else {
-      throw "数据异常";
-    }
+      // 如果http状态码正常，则直接返回数据
+      if (response.statusCode == HttpStatus.ok) {
+        if (json.decode(response.data)["code"] == 0) {
+          return response.data;
+        }
+        throw DioError(response: response, message: json.decode(response.data)["message"],type: DioErrorType.RESPONSE);
+      } else {
+        throw DioError(response: response, message: "网络异常",type: DioErrorType.RESPONSE);
+      }
   }
 }
