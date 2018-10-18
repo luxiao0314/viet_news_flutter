@@ -4,6 +4,7 @@ import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
+import 'package:viet_news_flutter/view/SelectItem.dart';
 
 class LanguageSettingPage extends StatefulWidget {
   @override
@@ -13,29 +14,6 @@ class LanguageSettingPage extends StatefulWidget {
 class _LanguageSettingPage extends State<LanguageSettingPage> {
   @override
   Widget build(BuildContext context) {
-    Widget auto = Container(
-      padding: const EdgeInsets.only(
-          left: left_right_margin),
-      color: bg_white,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-              child: Container(
-                padding: EdgeInsets.only(
-                    top: top_bottom_small, bottom: top_bottom_small),
-                child: Text(Local.of(context).auto, style: text_style_16_black),
-              )),
-          Container(
-              padding: EdgeInsets.only(left: 5.0, right: arrow_margin_right),
-              child: Icon(
-                CupertinoIcons.check_mark,
-                color: mediumGrayColor,
-                size: 21.0,
-              )),
-        ],
-      ),
-    );
-
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -57,21 +35,31 @@ class _LanguageSettingPage extends State<LanguageSettingPage> {
       ),
       body: Column(
         children: <Widget>[
-          auto,
+          SelectItem(
+            label: Local.of(context).auto,
+            isSelected: true,
+            onPress: () async {},
+          ),
           Padding(
             padding: EdgeInsets.only(left: 15.0),
             child: Divider(height: 0.3, color: CupertinoColors.inactiveGray),
           ),
-          auto,
+          SelectItem(
+            label: Local.of(context).chinese,
+            isSelected: false,
+            onPress: () async {},
+          ),
           Padding(
             padding: EdgeInsets.only(left: 15.0),
             child: Divider(height: 0.3, color: CupertinoColors.inactiveGray),
           ),
-          auto
+          SelectItem(
+            label: Local.of(context).english,
+            isSelected: false,
+            onPress: () async {},
+          ),
         ],
       ),
     );
   }
-
-
 }
