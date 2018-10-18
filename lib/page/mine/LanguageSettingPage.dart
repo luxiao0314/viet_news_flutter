@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
-import 'package:viet_news_flutter/res/dimens.dart';
-import 'package:viet_news_flutter/res/style.dart';
 import 'package:viet_news_flutter/view/SelectItem.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageSettingPage extends StatefulWidget {
   @override
@@ -14,6 +13,11 @@ class LanguageSettingPage extends StatefulWidget {
 class _LanguageSettingPage extends State<LanguageSettingPage> {
   @override
   Widget build(BuildContext context) {
+    final List<String> type = [
+      Local.of(context).auto,
+      Local.of(context).chinese,
+      Local.of(context).english
+    ];
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -33,32 +37,15 @@ class _LanguageSettingPage extends State<LanguageSettingPage> {
         backgroundColor: bg_white,
         elevation: 0.0,
       ),
-      body: Column(
-        children: <Widget>[
-          SelectItem(
-            label: Local.of(context).auto,
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return SelectItem(
+            label: type[index],
             isSelected: true,
             onPress: () async {},
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 15.0),
-            child: Divider(height: 0.3, color: CupertinoColors.inactiveGray),
-          ),
-          SelectItem(
-            label: Local.of(context).chinese,
-            isSelected: false,
-            onPress: () async {},
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 15.0),
-            child: Divider(height: 0.3, color: CupertinoColors.inactiveGray),
-          ),
-          SelectItem(
-            label: Local.of(context).english,
-            isSelected: false,
-            onPress: () async {},
-          ),
-        ],
+          );
+        },
+        itemCount: 3,
       ),
     );
   }
