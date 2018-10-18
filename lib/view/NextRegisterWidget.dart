@@ -19,7 +19,8 @@ class _NextRegisterWidgetState extends State<NextRegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: Container(
+    return SingleChildScrollView(
+        child: Container(
       color: Colors.white,
       padding: EdgeInsets.all(20.0),
       margin: EdgeInsetsDirectional.only(top: 20.0),
@@ -39,8 +40,8 @@ class _NextRegisterWidgetState extends State<NextRegisterWidget> {
               Expanded(
                   flex: 2,
                   child: TextField(
-                    autocorrect: true,//是否自动更正
-                    autofocus: true,//是否自动对焦
+                    autocorrect: true, //是否自动更正
+                    autofocus: true, //是否自动对焦
                     obscureText: true, //是否是密码
                     maxLines: 1,
                     controller: _controller,
@@ -51,13 +52,13 @@ class _NextRegisterWidgetState extends State<NextRegisterWidget> {
           ),
           Divider(),
           TextField(
-            autocorrect: true,//是否自动更正
-            autofocus: true,//是否自动对焦
+            autocorrect: true, //是否自动更正
+            autofocus: true, //是否自动对焦
             obscureText: true, //是否是密码
             maxLines: 1,
             controller: _controller,
             decoration:
-            InputDecoration(hintText: '再次输入密码', border: InputBorder.none),
+                InputDecoration(hintText: '再次输入密码', border: InputBorder.none),
           ),
           Divider(),
           Container(
@@ -68,7 +69,7 @@ class _NextRegisterWidgetState extends State<NextRegisterWidget> {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-              onPressed: () => toast(context, "注册"),
+              onPressed: () => toasts("注册"),
               minSize: 13.0,
               child: Text(
                 "注册",

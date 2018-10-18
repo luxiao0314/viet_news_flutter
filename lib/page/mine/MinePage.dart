@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/page/mine/FavoritePage.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
-import 'package:viet_news_flutter/page/mine/SettingsPage.dart';
+import 'package:viet_news_flutter/page/mine/EditPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
@@ -67,7 +67,9 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
                 left: 12.0, top: 5.0, right: 12.0, bottom: 5.0),
             color: Colors.red[500],
             borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-            onPressed: () {},
+            onPressed: () {
+              router(EditPage());
+            },
             minSize: 16.0,
             child: Row(
               children: <Widget>[
@@ -162,7 +164,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
 //                        router(LoginPage());
 //                      } else {
                         print('aaron login');
-                        router(SettingsPage());
+                        router(EditPage());
 //                      }
 //                    });
                   },
