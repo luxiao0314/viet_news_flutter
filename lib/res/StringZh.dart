@@ -54,6 +54,12 @@ class StringZh extends StringEn {
   @override
   String language_setting = "语言设置";
   @override
+  String auto = "跟随系统";
+  @override
+  String chinese = "中文";
+  @override
+  String english = "英文";
+  @override
   String help = "帮助";
   @override
   String feed_back = "反馈";

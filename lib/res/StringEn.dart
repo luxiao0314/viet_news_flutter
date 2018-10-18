@@ -28,6 +28,9 @@
   String avatar = "Avatar";
   String clearCache = "Clear Cache";
   String language_setting = "Language Setting";
+  String auto = "Auto";
+  String chinese = "Chinese";
+  String english = "English";
   String help = "Help";
   String feed_back = "Feed Back";
   String about = "About MagicBox";
