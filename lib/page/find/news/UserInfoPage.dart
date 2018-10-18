@@ -1,12 +1,11 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
+import 'package:viet_news_flutter/page/find/news/FansFollowListPage.dart';
 import 'package:viet_news_flutter/util/tools.dart' as Method;
 import 'package:viet_news_flutter/view/ContentListView.dart';
 
@@ -20,7 +19,6 @@ class _UserInfoPageState extends State<UserInfoPage> {
   static const platform = const MethodChannel(Method.methodChannelName);
   double _statusBarHeight = 0.0;
   ContentListResponse contentListResponse;
-
 
   @override
   void initState() {
@@ -41,23 +39,20 @@ class _UserInfoPageState extends State<UserInfoPage> {
   /// 获取用户信息
   Future<void> _requestGetUserInfo() async {
     Method.print2("aaaaa", "打印");
-    final response = await Fetch.init.get(ApiService.userInfo + "${widget.author.id}");
+    final response =
+        await Fetch.init.get(ApiService.userInfo + "${widget.author.id}");
     final author = ContentListResponseAuthor.fromJson(response);
     Method.print2("author", author.toString());
     widget.author = author;
-    setState(() {
-    });
+    setState(() {});
   }
 
   /// 获取该用户发表的文章
   Future<void> _requestGetUserArticle() async {
     final response = await Fetch.init.post(ApiService.contentListForUser);
     contentListResponse = ContentListResponse(response);
-    setState(() {
-
-    });
+    setState(() {});
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,26 +72,22 @@ class _UserInfoPageState extends State<UserInfoPage> {
               new Column(
                 children: <Widget>[
                   new Container(
-                    height: 213.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.author.avatar),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.6),
-                          BlendMode.colorBurn
-                        )
-                      )
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        // 导航条
-                        _renderNavigationBar(),
-                        // 用户信息
-                        _renderHeaderInfo()
-                      ],
-                    )
-                  ),
+                      height: 213.0,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(widget.author.avatar),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.6),
+                                  BlendMode.colorBurn))),
+                      child: Column(
+                        children: <Widget>[
+                          // 导航条
+                          _renderNavigationBar(),
+                          // 用户信息
+                          _renderHeaderInfo()
+                        ],
+                      )),
                 ],
               ),
               new Positioned(
@@ -106,16 +97,15 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   width: MediaQuery.of(context).size.width - 24.0,
                   height: 56.0,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(28.0)),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0.0, 16.0),
-                        color: Color.fromRGBO(242, 75, 79, 0.2),
-                        blurRadius: 25.0,
-                        spreadRadius: -9.0)
-                    ]
-                  ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(28.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0.0, 16.0),
+                            color: Color.fromRGBO(242, 75, 79, 0.2),
+                            blurRadius: 25.0,
+                            spreadRadius: -9.0)
+                      ]),
                   child: _renderFloatingFansAndAttention(),
                 ),
               )
@@ -126,14 +116,16 @@ class _UserInfoPageState extends State<UserInfoPage> {
           child: ListView.builder(
             itemBuilder: (context, index) {
               if (contentListResponse == null) {
-                return  new Center(
+                return new Center(
                   child: new Text("该用户没有发布文章"),
                 );
               } else {
                 new ContentListView(data: contentListResponse.data.list[index]);
               }
             },
-            itemCount: contentListResponse == null ? 1: contentListResponse.data.list.length,
+            itemCount: contentListResponse == null
+                ? 1
+                : contentListResponse.data.list.length,
           ),
         ),
       ],
@@ -161,48 +153,48 @@ class _UserInfoPageState extends State<UserInfoPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         new Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.0),
-          child: Row(
-            children: <Widget>[
-              // 头像
-              new Container(
-                width: 64.0,
-                height: 64.0,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: NetworkImage(widget.author.avatar),
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              children: <Widget>[
+                // 头像
+                new Container(
+                  width: 64.0,
+                  height: 64.0,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(widget.author.avatar),
+                  ),
                 ),
-              ),
-              // 名字 金币
-              new Container(
-                padding: EdgeInsets.only(left: 12.0),
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      child: Text(widget.author.nick_name, style: TextStyle(color: Colors.white)),
-                      padding: EdgeInsets.only(bottom: 10.0),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "images/ic_userinfo_coin.png",
-                          width: 15.0,
-                          height: 15.0,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 5.0),
-                          child: Text("0",
-                              style: TextStyle(color: Colors.white)),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )
-            ],
-          )
-        ),
+                // 名字 金币
+                new Container(
+                  padding: EdgeInsets.only(left: 12.0),
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        child: Text(widget.author.nick_name,
+                            style: TextStyle(color: Colors.white)),
+                        padding: EdgeInsets.only(bottom: 10.0),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "images/ic_userinfo_coin.png",
+                            width: 15.0,
+                            height: 15.0,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 5.0),
+                            child: Text("0",
+                                style: TextStyle(color: Colors.white)),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )),
         new Container(
           width: 74.0,
           height: 27.0,
@@ -212,11 +204,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
             borderRadius: BorderRadius.all(Radius.circular(27.0 / 2)),
           ),
           child: new CupertinoButton(
-            padding: EdgeInsets.symmetric(vertical: 2.0),
-            child: new Text("+ 关注",
-                style: TextStyle(fontSize: 13.0, color: Colors.white)),
-            onPressed: null
-          ),
+              padding: EdgeInsets.symmetric(vertical: 2.0),
+              child: new Text("+ 关注",
+                  style: TextStyle(fontSize: 13.0, color: Colors.white)),
+              onPressed: null),
         )
       ],
     );
@@ -224,26 +215,33 @@ class _UserInfoPageState extends State<UserInfoPage> {
 
   // 中间悬浮窗 粉丝 关注 数量
   Widget _renderFloatingFansAndAttention() {
-    final fansCount = widget.author.fans_count == null ? 0 : widget.author.fans_count;
-    final followCount = widget.author.follow_count == null ? 0: widget.author.follow_count;
+    final fansCount =
+        widget.author.fans_count == null ? 0 : widget.author.fans_count;
+    final followCount =
+        widget.author.follow_count == null ? 0 : widget.author.follow_count;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         CupertinoButton(
           child: RichText(
             text: TextSpan(
-              text: "粉丝 ",
-              style: TextStyle(color: Colors.black87, fontSize: 14.0),
-              children: [
-                TextSpan(
-                  text: "$followCount",
-                  style: TextStyle(color: Colors.black, fontSize: 17.0, fontWeight: FontWeight.bold)
-                )
-              ]
-            ),
+                text: "粉丝 ",
+                style: TextStyle(color: Colors.black87, fontSize: 14.0),
+                children: [
+                  TextSpan(
+                      text: "$followCount",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold))
+                ]),
           ),
           onPressed: () {
-            toast(context, "粉丝");
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return new FansFollowListPage();
+              })
+            );
           },
         ),
         Container(
@@ -254,24 +252,28 @@ class _UserInfoPageState extends State<UserInfoPage> {
         CupertinoButton(
           child: RichText(
             text: TextSpan(
-              text: "关注 ",
-              style: TextStyle(color: Colors.black87, fontSize: 14.0),
-              children: [
-                TextSpan(
-                  text: "$followCount",
-                  style: TextStyle(color: Colors.black, fontSize: 17.0, fontWeight: FontWeight.bold)
-                )
-              ]
-            ),
+                text: "关注 ",
+                style: TextStyle(color: Colors.black87, fontSize: 14.0),
+                children: [
+                  TextSpan(
+                      text: "$followCount",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold))
+                ]),
           ),
           onPressed: () {
-            toast(context, "关注");
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return new FansFollowListPage();
+              })
+            );
           },
         ),
       ],
     );
   }
-
 
   static Future<double> get _getStatusBarHeight async {
     try {

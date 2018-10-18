@@ -21,9 +21,33 @@ Future<List<String>> getWebDetailPreference() async {
 }
 
 void print2(String title, dynamic content) {
-  print("-------------Start $title-------------");
+  print("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ $title ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
   print(content);
-  print("-------------End $title-------------");
+  print("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ $title ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+}
+
+void print3(
+    String title,
+    String method,
+    dynamic params, dynamic response, bool status) {
+  String statusStr;
+  String commentResult;
+  if (status) {
+    statusStr = "✅成功✅";
+    commentResult = "成功";
+  } else {
+    statusStr = "❌失败❌";
+    commentResult = "失败";
+  }
+  print("\n-------------------- 请求开始 $statusStr --------------------"
+        "\n"
+        "请求接口: $title"
+        "\n"
+        "请求类型: $method"
+        "\n"
+        "请求参数: $params"
+        "\n"
+        "$commentResult: ${response.toString()}");
 }
 
 const String methodChannelName = "com.mw.viet_flutter_news/channel";

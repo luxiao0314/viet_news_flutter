@@ -11,12 +11,12 @@ import 'package:viet_news_flutter/res/style.dart';
 import 'package:viet_news_flutter/view/CommonItem.dart';
 import 'package:viet_news_flutter/view/SettingsGroup.dart';
 
-class SettingsPage extends StatefulWidget {
+class EditPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SettingsPage();
+  State<StatefulWidget> createState() => _EditPage();
 }
 
-class _SettingsPage extends State<SettingsPage> {
+class _EditPage extends State<EditPage> {
   File _image;
 
   Future getImage() async {
@@ -106,7 +106,7 @@ class _SettingsPage extends State<SettingsPage> {
             )
           ]),
           Container(
-            padding: EdgeInsets.only(top: 10.0),
+            padding: EdgeInsets.only(top: module_margin),
           ),
           SettingsGroup(<Widget>[
             CommonItem(

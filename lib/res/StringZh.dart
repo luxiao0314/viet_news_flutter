@@ -49,4 +49,16 @@ class StringZh extends StringEn {
   String password = "登录密码";
   @override
   String avatar = "头像";
+  @override
+  String clearCache = "清除缓存";
+  @override
+  String language_setting = "语言设置";
+  @override
+  String help = "帮助";
+  @override
+  String feed_back = "反馈";
+  @override
+  String about = "关于 MagicBox";
+  @override
+  String version = "版本";
 }

@@ -19,6 +19,17 @@ class _LoginSubPageStatus extends State<LoginSubPage>
   void initState() {
     super.initState();
     _controller = new TabController(length: 2, vsync: this);
+    _controller.addListener(() {
+      if (_controller.indexIsChanging) {
+        FocusScope.of(context).requestFocus(new FocusNode()); //隐藏软键盘
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override

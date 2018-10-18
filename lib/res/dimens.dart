@@ -8,3 +8,4 @@ const double icon_width = 29.0;
 const double icon_user = 70.0;
 const double top_bottom_middle = 24.0;
 const double arrow_margin_right = 8.5;
+const double module_margin = 10.0;
