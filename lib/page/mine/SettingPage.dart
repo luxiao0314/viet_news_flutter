@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/manager/CusToast.dart';
+import 'package:viet_news_flutter/page/mine/LanguageSettingPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/view/CommonItem.dart';
@@ -47,7 +48,9 @@ class _SettingPage extends State<SettingPage> {
               type: CommonItemType.modal,
               label: Local.of(context).language_setting,
               hasDetails: true,
-              onPress: () async {},
+              onPress: () async{
+                router(LanguageSettingPage());
+              },
             ),
             CommonItem(
               type: CommonItemType.modal,
@@ -99,5 +102,12 @@ class _SettingPage extends State<SettingPage> {
         ],
       ),
     );
+  }
+
+  router(Widget widget) {
+    Navigator.of(context, rootNavigator: true)
+        .push(new MaterialPageRoute(builder: (context) {
+      return widget;
+    }));
   }
 }
