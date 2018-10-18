@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/HttpInterceptor.dart';
+import 'package:viet_news_flutter/util/Config.dart';
 import 'package:viet_news_flutter/util/tools.dart' as Tools;
 
 class Fetch {
@@ -25,7 +26,7 @@ class Fetch {
         connectTimeout: 5000,
         receiveTimeout: 5000,
         headers: {
-          "Authorization":
+          Config.NETWORK_TOKEN_KEY:
           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
         });
     dio = new Dio(options);
