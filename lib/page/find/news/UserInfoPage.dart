@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +5,7 @@ import 'package:viet_news_flutter/bean/ContentListResponse.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
+import 'package:viet_news_flutter/page/find/news/FansFollowListPage.dart';
 import 'package:viet_news_flutter/util/tools.dart' as Method;
 import 'package:viet_news_flutter/view/ContentListView.dart';
 
@@ -244,6 +243,11 @@ class _UserInfoPageState extends State<UserInfoPage> {
           ),
           onPressed: () {
             toast(context, "粉丝");
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return new FansFollowListPage();
+              })
+            );
           },
         ),
         Container(
@@ -266,6 +270,11 @@ class _UserInfoPageState extends State<UserInfoPage> {
           ),
           onPressed: () {
             toast(context, "关注");
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return new FansFollowListPage();
+              })
+            );
           },
         ),
       ],
