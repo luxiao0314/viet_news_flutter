@@ -19,16 +19,10 @@ class HttpInterceptor {
       return options;
     };
     dio.interceptor.response.onSuccess = (Response response) async {
-      print("response: $response");
-//      if (json.decode(response.data)["code"] == 0) {
-//        return response.data;
-//      } else {
-//        toasts(json.decode(response.data)["message"]);
-//      }
       return response;
     };
     dio.interceptor.response.onError = (DioError e) async {
-      print("error: $e");
+//      print("error: $e");
       toasts(e.message);
       return e;
     };
