@@ -106,7 +106,7 @@ class _EditPage extends State<EditPage> {
             )
           ]),
           Container(
-            padding: EdgeInsets.only(top: 10.0),
+            padding: EdgeInsets.only(top: module_margin),
           ),
           SettingsGroup(<Widget>[
             CommonItem(

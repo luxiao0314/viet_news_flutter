@@ -105,7 +105,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
           children: <Widget>[
             userItem,
             Padding(
-              padding: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.only(top: module_margin),
               child: SettingsGroup(<Widget>[
                 CommonItem(
                   type: CommonItemType.modal,
