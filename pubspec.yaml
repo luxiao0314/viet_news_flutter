@@ -30,6 +30,7 @@ dependencies:
   flutter_svg: ^0.6.1
   image_picker: ^0.4.10
   flutter_slidable: "^0.4.7"
+  sqflite: any
 
 dev_dependencies:
   flutter_test:
