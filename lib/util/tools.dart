@@ -39,15 +39,18 @@ void print3(
     statusStr = "❌失败❌";
     commentResult = "失败";
   }
-  print("\n-------------------- 请求开始 $statusStr --------------------"
+  print("\n|-------------------- 请求开始 $statusStr --------------------"
         "\n"
-        "请求接口: $title"
+        "|\n"
+        "|请求接口: $title"
         "\n"
-        "请求类型: $method"
+        "|请求类型: $method"
         "\n"
-        "请求参数: $params"
+        "|请求参数: $params"
         "\n"
-        "$commentResult: ${response.toString()}");
+        "|$commentResult: ${response.toString()}"
+        "\n|"
+        "\n|------------------------- 请求结束 --------------------------");
 }
 
 const String methodChannelName = "com.mw.viet_flutter_news/channel";
