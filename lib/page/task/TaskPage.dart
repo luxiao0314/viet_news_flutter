@@ -110,7 +110,7 @@ class _TaskPageState extends State<TaskPage> {
                       borderRadius:
                           const BorderRadius.all(Radius.circular(60.0)),
                       onPressed: () {
-                        toast(context, "查看");
+                        toasts("查看");
                       },
                       minSize: 14.0,
                       child: Text(
@@ -174,7 +174,7 @@ class _TaskPageState extends State<TaskPage> {
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
               onPressed: () {
-                toast(context, "去邀请");
+                toasts("去邀请");
               },
               minSize: 13.0,
               child: Text(

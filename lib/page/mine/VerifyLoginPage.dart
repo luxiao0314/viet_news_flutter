@@ -53,7 +53,7 @@ class _VerifyStatus extends State<VerifyLoginPage> {
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 color: Colors.red[500],
                 borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-                onPressed: () => toast(context, "获取验证码"),
+                onPressed: () => toasts("获取验证码"),
                 minSize: 13.0,
                 child: Text(
                   "获取验证码",
@@ -71,7 +71,7 @@ class _VerifyStatus extends State<VerifyLoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               color: Colors.red[500],
               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
-              onPressed: () => toast(context, "登录"),
+              onPressed: () => toasts("登录"),
               minSize: 13.0,
               child: Text(
                 "登录",

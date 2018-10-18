@@ -62,7 +62,7 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
                       color: btn_blue,
                       borderRadius:
                           const BorderRadius.all(Radius.circular(60.0)),
-                      onPressed: () => toast(context, "Facebook登录"),
+                      onPressed: () => toasts("Facebook登录"),
                       minSize: 13.0,
                       child: Text(
                         "Facebook登录",

@@ -120,21 +120,22 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   _register() {
     if (_controllerNum.text.isEmpty) {
-      toast(context, "请输入手机号码");
+      toasts("请输入手机号码");
       return;
     }
     if (_controllerCode.text.isEmpty) {
-      toast(context, "请输入验证码");
+      toasts("请输入验证码");
       return;
     }
-    model.register(
+    model
+        .register(
             _controllerNum.text, _controllerCode.text, _controllerInvite.text)
         .then((res) => widget.onNextClick());
   }
 
   _getCode() {
     if (_controllerNum.text.isEmpty) {
-      toast(context, "请输入手机号码");
+      toasts("请输入手机号码");
       return;
     }
     model.sendSms(_controllerNum.text);
