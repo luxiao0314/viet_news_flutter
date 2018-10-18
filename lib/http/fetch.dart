@@ -42,11 +42,11 @@ class Fetch {
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    logger.log(path, data, "GET", data);
     return dio.post(path, data: data).then(_checkStatus).catchError(onError);
   }
 
   Future<dynamic> _checkStatus(Response response) async {
+    logger.log(response);
     //dio内部已经处理http错误情况,不会执行到这里
     if (json.decode(response.data)["code"] == 0) {
       return response.data;

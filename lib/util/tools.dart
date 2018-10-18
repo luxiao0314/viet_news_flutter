@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:viet_news_flutter/bean/ContentListResponse.dart';
 
@@ -29,6 +30,7 @@ void print2(String title, dynamic content) {
 void print3(
     String title,
     String method,
+    String header,
     dynamic params, dynamic response, bool status) {
   String statusStr;
   String commentResult;
@@ -43,14 +45,17 @@ void print3(
         "\n"
         "|\n"
         "|请求接口: $title"
+         "\n"
+        "|请求头: $header"
+        "\n"
         "\n"
         "|请求类型: $method"
         "\n"
         "|请求参数: $params"
         "\n"
-        "|$commentResult: ${response.toString()}"
+        "|请求$commentResult: ${response.data.toString()}"
         "\n|"
-        "\n|------------------------- 请求结束 --------------------------");
+        "\n|-------------------- 请求结束 $commentResult --------------------");
 }
 
 const String methodChannelName = "com.mw.viet_flutter_news/channel";

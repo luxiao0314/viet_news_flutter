@@ -8,12 +8,8 @@ class Logger {
     this.dio = dio;
   }
 
-  void log(String path, data, String method, dynamic params) async {
-    this.dio.interceptor.response.onSuccess = ((response) {
-      Tools.print3(path, method, params, response ,true);
-    });
-    this.dio.interceptor.response.onError = ((error) {
-      Tools.print3(path, method, params, error,false);
-    });
+  void log(Response res) async {
+    var request = res.request;
+    Tools.print3(request.baseUrl + request.path, res.request.method, request.headers.toString(),res.request.data, res, true);
   }
 }
