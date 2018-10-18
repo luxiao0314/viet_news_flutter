@@ -9,7 +9,6 @@ import 'package:viet_news_flutter/manager/ToastManager.dart';
 import 'package:viet_news_flutter/util/Config.dart';
 import 'package:viet_news_flutter/util/Logger.dart';
 
-
 class Fetch {
   Dio dio;
   static Fetch instance;
@@ -29,8 +28,7 @@ class Fetch {
         connectTimeout: 5000,
         receiveTimeout: 5000,
         headers: {
-          Config.NETWORK_TOKEN_KEY:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
+          Config.NETWORK_TOKEN_KEY: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
         });
     dio = new Dio(options);
     HttpInterceptor(dio);
@@ -58,5 +56,6 @@ class Fetch {
 
   onError(e) {
     toasts(HandleException.handle(e).message);
+    throw "";
   }
 }
