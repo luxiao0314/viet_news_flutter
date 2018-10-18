@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
-import 'package:viet_news_flutter/http/BaseResponse.dart';
+import 'package:viet_news_flutter/http/HandleException.dart';
 import 'package:viet_news_flutter/http/HttpInterceptor.dart';
 import 'package:viet_news_flutter/manager/ToastManager.dart';
 
@@ -26,32 +26,31 @@ class Fetch {
         receiveTimeout: 5000,
         headers: {
           "Authorization":
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
         });
     dio = new Dio(options);
     HttpInterceptor(dio);
   }
 
   Future<dynamic> get(String path, {dynamic data}) async {
-    return dio.get(path, data: data).then(_checkStatus);
+    return dio.get(path, data: data).then(_checkStatus).catchError(onError);
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    return dio.post(path, data: data).then(_checkStatus);
+    return dio.post(path, data: data).then(_checkStatus).catchError(onError);
   }
 
   Future<dynamic> _checkStatus(Response response) async {
-    // 如果http状态码正常，则直接返回数据
-    if (response.statusCode == HttpStatus.ok) {
-      if (json.decode(response.data)["code"] == 0) {
-        return response.data;
-      }
-      throw DioError(response: response,
-          message: json.decode(response.data)["message"],
-          type: DioErrorType.RESPONSE);
+    //dio内部已经处理http错误情况,不会执行到这里
+    if (json.decode(response.data)["code"] == 0) {
+      return response.data;
     } else {
-      throw DioError(
-          response: response, message: "网络异常", type: DioErrorType.RESPONSE);
+      //服务器异常
+      return Future.error(DioError(message: json.decode(response.data)["message"]));
     }
+  }
+
+  onError(e) {
+    toasts(HandleException.handle(e).message);
   }
 }
