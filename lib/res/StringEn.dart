@@ -26,4 +26,11 @@
   String phoneNum = "Mobile";
   String password = "PassWord";
   String avatar = "Avatar";
+  String clearCache = "Clear Cache";
+  String language_setting = "Language Setting";
+  String help = "Help";
+  String feed_back = "Feed Back";
+  String about = "About MagicBox";
+  String version = "Version";
+
 }

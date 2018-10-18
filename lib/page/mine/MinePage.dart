@@ -5,6 +5,7 @@ import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/page/mine/FavoritePage.dart';
 import 'package:viet_news_flutter/page/mine/LoginPage.dart';
 import 'package:viet_news_flutter/page/mine/EditPage.dart';
+import 'package:viet_news_flutter/page/mine/SettingPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
 import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/res/style.dart';
@@ -164,7 +165,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
 //                        router(LoginPage());
 //                      } else {
                         print('aaron login');
-                        router(EditPage());
+                        router(SettingPage());
 //                      }
 //                    });
                   },
