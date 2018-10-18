@@ -14,13 +14,13 @@ class HttpInterceptor {
 
   ///拦截器,可处理loading
   initInterceptor() {
-    dio.interceptor.request.onSend = (Options options) async {
+    dio.interceptor.request.onSend = (Options options) {
       return options;
     };
-    dio.interceptor.response.onSuccess = (Response response) async {
+    dio.interceptor.response.onSuccess = (Response response) {
       return response;
     };
-    dio.interceptor.response.onError = (DioError e) async {
+    dio.interceptor.response.onError = (DioError e) {
       var handle = HandleException.handle(e);
       toasts(handle.message);
       return handle;

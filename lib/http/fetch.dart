@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/HandleException.dart';
@@ -28,7 +28,8 @@ class Fetch {
         connectTimeout: 5000,
         receiveTimeout: 5000,
         headers: {
-          Config.NETWORK_TOKEN_KEY: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
+          Config.NETWORK_TOKEN_KEY:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b20iLCJwaG9uZU51bWJlciI6IjE4Njc0MzU1MDQxIiwicm9sZUlkIjoiMSIsImlzcyI6Im1lcmN1bGV0IiwiZXhwIjoxNTQyMzU4MTA5LCJ1c2VySWQiOiIyMCIsImlhdCI6MTUzOTc2NjEwOX0.bLA3XwTMUqz3AqKCjLUbam3ChZeXNLWPrcM6pHe7r8Q",
         });
     dio = new Dio(options);
     HttpInterceptor(dio);
@@ -36,11 +37,11 @@ class Fetch {
   }
 
   Future<dynamic> get(String path, {dynamic data}) async {
-    return dio.get(path, data: data).then(_checkStatus).catchError(onError);
+    return dio.get(path, data: data).then(_checkStatus).catchError(_onError);
   }
 
   Future<dynamic> post(String path, {dynamic data}) async {
-    return dio.post(path, data: data).then(_checkStatus).catchError(onError);
+    return dio.post(path, data: data).then(_checkStatus).catchError(_onError);
   }
 
   Future<dynamic> _checkStatus(Response response) async {
@@ -49,13 +50,15 @@ class Fetch {
     if (json.decode(response.data)["code"] == 0) {
       return response.data;
     } else {
-      //服务器异常
-      return Future.error(DioError(message: json.decode(response.data)["message"]));
+      //服务器异常，使用_onError统一处理
+      _onError(DioError(message: json.decode(response.data)["message"]));
+      //数据异常，返回""。
+      return "";
     }
   }
 
-  onError(e) {
+  Error _onError(e) {
     toasts(HandleException.handle(e).message);
-    throw "";
+    return e;
   }
 }
