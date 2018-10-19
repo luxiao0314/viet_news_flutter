@@ -6,6 +6,7 @@ import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/redux/LocalRedux.dart';
 import 'package:viet_news_flutter/redux/NewsState.dart';
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/view/SelectItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +40,7 @@ class _LanguageSettingPage extends State<LanguageSettingPage> {
                 Theme.of(context).textTheme.title.copyWith(color: text_black)),
         centerTitle: true,
         backgroundColor: bg_white,
-        elevation: 0.0,
+        elevation: elevation_low,
       ),
       body: StoreBuilder<NewsState>(
         builder: (context, store) {
@@ -65,10 +66,10 @@ class _LanguageSettingPage extends State<LanguageSettingPage> {
   static changeLocale(Store<NewsState> store, int index) {
     Locale locale = store.state.platformLocale;
     switch (index) {
-      case 0:
       case 1:
         locale = Locale('zh', 'CH');
         break;
+      case 0:
       case 2:
         locale = Locale('en', 'US');
         break;

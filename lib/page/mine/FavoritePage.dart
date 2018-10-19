@@ -6,6 +6,7 @@ import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/util/tools.dart';
 import 'package:viet_news_flutter/view/FavoriteListView.dart';
 
@@ -45,7 +46,7 @@ class _FavoritePage extends State<FavoritePage> with TickerProviderStateMixin {
                 Theme.of(context).textTheme.title.copyWith(color: text_black)),
         centerTitle: true,
         backgroundColor: bg_white,
-        elevation: 0.0,
+        elevation: elevation_low,
       ),
       body: SmartRefresher(
           enablePullDown: true,

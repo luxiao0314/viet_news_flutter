@@ -99,7 +99,7 @@ class _MinePageStatus extends State<MinePage> with TickerProviderStateMixin {
                   .copyWith(color: text_black)),
           centerTitle: true,
           backgroundColor: bg_white,
-          elevation: 0.0,
+          elevation: elevation_low,
         ),
         body: Column(
           children: <Widget>[

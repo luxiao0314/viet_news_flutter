@@ -9,6 +9,7 @@ import 'package:viet_news_flutter/model/response/ChannelResponse.dart';
 import 'package:viet_news_flutter/page/find/channel/ChannelPage.dart';
 import 'package:viet_news_flutter/page/find/news/NewsPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/dimens.dart';
 
 class FindPage extends StatefulWidget {
   @override
@@ -42,7 +43,7 @@ class _FindPageStatus extends State<FindPage> with TickerProviderStateMixin {
         title: Text(Local.of(context).find),
         bottom: _initTabBar(),
         backgroundColor: primary_red,
-        elevation: 0.0,
+        elevation: elevation_low,
       ),
       body: _initPageView(),
     );

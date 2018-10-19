@@ -5,6 +5,7 @@ import 'package:viet_news_flutter/http/APIService.dart';
 import 'package:viet_news_flutter/http/fetch.dart';
 import 'package:viet_news_flutter/local/Local.dart';
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/dimens.dart';
 import 'package:viet_news_flutter/view/ContentListView.dart';
 
 class FollowPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _FollowPageStatus extends State<FollowPage>
         title: Text(Local.of(context).follow),
         centerTitle: true,
         backgroundColor: primary_red,
-        elevation: 0.0,
+        elevation: elevation_low,
       ),
       body: SmartRefresher(
           enablePullDown: true,

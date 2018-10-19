@@ -33,7 +33,7 @@ class _SettingPage extends State<SettingPage> {
                 Theme.of(context).textTheme.title.copyWith(color: text_black)),
         centerTitle: true,
         backgroundColor: bg_white,
-        elevation: 0.0,
+        elevation: elevation_low,
       ),
       body: new Column(
         children: <Widget>[
@@ -42,12 +42,14 @@ class _SettingPage extends State<SettingPage> {
               type: CommonItemType.modal,
               label: Local.of(context).clearCache,
               hasDetails: false,
+              value: "3.25M",
               onPress: () async {},
             ),
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).language_setting,
               hasDetails: true,
+              value: "Auto",
               onPress: () async{
                 router(LanguageSettingPage());
               },
@@ -78,6 +80,7 @@ class _SettingPage extends State<SettingPage> {
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).version,
+              value: "v1.0.0",
               hasDetails: true,
               onPress: () async {},
             ),

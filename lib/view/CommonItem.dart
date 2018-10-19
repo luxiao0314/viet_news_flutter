@@ -22,7 +22,7 @@ class CommonItem extends StatefulWidget {
     this.value,
     this.hasDetails = false,
     this.onPress,
-  }) : assert(label != null),
+  })  : assert(label != null),
         assert(type != null);
 
   final String label;
@@ -65,7 +65,7 @@ class CommonItemState extends State<CommonItem> {
     if (widget.subtitle == null) {
       titleSection = Padding(
         padding: EdgeInsets.only(top: 1.5),
-        child: Text(widget.label,style: text_style_16_black),
+        child: Text(widget.label, style: text_style_16_black),
       );
     } else {
       titleSection = Column(
@@ -103,8 +103,7 @@ class CommonItemState extends State<CommonItem> {
             padding: const EdgeInsets.only(right: 11.0),
             child: CupertinoSwitch(
               value: switchValue,
-              onChanged: (bool value) =>
-                  setState(() => switchValue = value),
+              onChanged: (bool value) => setState(() => switchValue = value),
             ),
           ),
         );
@@ -116,7 +115,7 @@ class CommonItemState extends State<CommonItem> {
             Padding(
               padding: const EdgeInsets.only(
                 top: 1.5,
-                right: 2.25,
+                right: 8.5,
               ),
               child: Text(
                 widget.value,
@@ -131,7 +130,6 @@ class CommonItemState extends State<CommonItem> {
             Padding(
               padding: const EdgeInsets.only(
                 top: 0.5,
-                left: 2.25,
               ),
               child: Icon(
                 CupertinoIcons.forward,
@@ -145,7 +143,6 @@ class CommonItemState extends State<CommonItem> {
         rightRowChildren.add(Padding(
           padding: const EdgeInsets.only(right: 8.5),
         ));
-
 
         rowChildren.add(
           Row(
@@ -162,11 +159,17 @@ class CommonItemState extends State<CommonItem> {
         behavior: HitTestBehavior.opaque,
         onTap: () {
           if (widget.onPress != null) {
-            setState(() { pressed = true; });
+            setState(() {
+              pressed = true;
+            });
             widget.onPress().whenComplete(() {
               Future.delayed(
                 Duration(milliseconds: 150),
-                    () { setState(() { pressed = false; }); },
+                () {
+                  setState(() {
+                    pressed = false;
+                  });
+                },
               );
             });
           }

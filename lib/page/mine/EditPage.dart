@@ -82,7 +82,7 @@ class _EditPage extends State<EditPage> {
                 Theme.of(context).textTheme.title.copyWith(color: text_black)),
         centerTitle: true,
         backgroundColor: bg_white,
-        elevation: 0.0,
+        elevation: elevation_low,
       ),
       body: Column(
         children: <Widget>[
@@ -95,12 +95,14 @@ class _EditPage extends State<EditPage> {
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).magic_num,
+              value: "A123456",
               hasDetails: true,
               onPress: () async {},
             ),
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).nickname,
+              value: "今晚打老虎",
               hasDetails: true,
               onPress: () async {},
             )
@@ -112,12 +114,14 @@ class _EditPage extends State<EditPage> {
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).phoneNum,
+              value: "已绑定",
               hasDetails: true,
               onPress: () async {},
             ),
             CommonItem(
               type: CommonItemType.modal,
               label: Local.of(context).password,
+              value: "已设置",
               hasDetails: true,
               onPress: () async {},
             ),

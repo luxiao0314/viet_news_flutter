@@ -4,6 +4,7 @@ import 'package:viet_news_flutter/manager/ToastManager.dart';
 import 'package:viet_news_flutter/page/mine/LoginSubPage.dart';
 import 'package:viet_news_flutter/page/mine/RegisterPage.dart';
 import 'package:viet_news_flutter/res/colors.dart';
+import 'package:viet_news_flutter/res/dimens.dart';
 
 /// @Description 登录页面
 /// @Author sean
@@ -23,7 +24,7 @@ class _LoginPageStatus extends State<LoginPage> with TickerProviderStateMixin {
       child: new Scaffold(
         appBar: AppBar(
             leading: Icon(null), //让back按钮不再显示
-            elevation: 0.0,
+            elevation: elevation_low,
             backgroundColor: Colors.white,
             bottom: _initTabBar()),
         body: _body(),
